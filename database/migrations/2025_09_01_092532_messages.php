@@ -9,9 +9,6 @@ return new class extends Migration {
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            // $table->uuid('sender_id');
-            // $table->uuid('receiver_id');
-            // $table->uuid('order_id')->nullable();
             $table->text('content');
             $table->enum('message_type', ['text', 'image', 'location', 'system']);
             $table->json('attachments')->nullable();

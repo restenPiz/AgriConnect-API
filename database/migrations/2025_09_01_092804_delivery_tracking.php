@@ -9,8 +9,6 @@ return new class extends Migration {
     {
         Schema::create('delivery_tracking', function (Blueprint $table) {
             $table->id();
-            // $table->uuid('order_id');
-            // $table->uuid('transporter_id')->nullable();
             $table->geometry('current_location', 'point')->nullable();
             $table->enum('status', ['pickup_pending', 'in_transit', 'delivered', 'failed']);
             $table->timestamp('estimated_arrival')->nullable();

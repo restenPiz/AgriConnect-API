@@ -9,9 +9,6 @@ return new class extends Migration {
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            // $table->uuid('product_id')->nullable();
-            // $table->uuid('reviewer_id');
-            // $table->uuid('order_id')->nullable();
             $table->integer('rating')->unsigned();
             $table->text('comment')->nullable();
             $table->json('image_urls')->nullable();

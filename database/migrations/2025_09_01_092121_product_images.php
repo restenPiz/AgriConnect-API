@@ -9,7 +9,6 @@ return new class extends Migration {
     {
         Schema::create('product_images', function (Blueprint $table) {
             $table->id();
-            // $table->uuid('product_id');
             $table->string('image_url', 500);
             $table->integer('image_order')->default(0);
             $table->string('alt_text', 255)->nullable();

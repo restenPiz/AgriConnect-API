@@ -10,8 +10,6 @@ return new class extends Migration {
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            // $table->uuid('buyer_id');
-            // $table->uuid('cooperative_id')->nullable();
             $table->decimal('total_amount', 10, 2);
             $table->enum('status', ['pending', 'confirmed', 'preparing', 'shipped', 'delivered', 'cancelled']);
             $table->json('delivery_address')->nullable();

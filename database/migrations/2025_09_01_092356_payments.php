@@ -9,9 +9,6 @@ return new class extends Migration {
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            // $table->uuid('order_id');
-            // $table->uuid('payer_id');
-            // $table->uuid('payee_id');
             $table->decimal('amount', 10, 2);
             $table->enum('payment_method', ['m_pesa', 'e_mola', 'cash', 'bank_transfer']);
             $table->enum('status', ['pending', 'processing', 'completed', 'failed', 'refunded']);
