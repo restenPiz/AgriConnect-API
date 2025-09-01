@@ -8,8 +8,8 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('cooperatives', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->uuid('coordinator_id');
+            $table->id();
+            // $table->id('coordinator_id');
             $table->string('name', 100);
             $table->text('description')->nullable();
             $table->enum('type', ['temporary', 'permanent']);
@@ -18,12 +18,13 @@ return new class extends Migration {
             $table->integer('total_orders')->default(0);
             $table->decimal('total_revenue', 15, 2)->default(0);
             $table->json('governance_rules')->nullable();
-            $table->point('primary_location')->nullable();
+            $table->geometry('primary_location', 'point')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('coordinator_id')->references('id')->on('users');
-            $table->index(['status', 'type']);
+            $table->foreignId('coordinator_id')->references('id')->on('users');
+            // $table->foreignId('coordinator_id')->constrained('users')->onDelete('cascade');
+            // $table->index(['status', 'type']);
         });
     }
 

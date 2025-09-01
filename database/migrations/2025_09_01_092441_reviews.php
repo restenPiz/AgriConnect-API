@@ -8,23 +8,23 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('reviews', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->uuid('product_id')->nullable();
-            $table->uuid('reviewer_id');
-            $table->uuid('order_id')->nullable();
+            $table->id();
+            // $table->uuid('product_id')->nullable();
+            // $table->uuid('reviewer_id');
+            // $table->uuid('order_id')->nullable();
             $table->integer('rating')->unsigned();
             $table->text('comment')->nullable();
             $table->json('image_urls')->nullable();
             $table->boolean('is_verified')->default(false);
             $table->timestamps();
 
-            $table->foreign('product_id')->references('id')->on('products');
-            $table->foreign('reviewer_id')->references('id')->on('users');
-            $table->foreign('order_id')->references('id')->on('orders');
-            $table->index(['product_id', 'is_verified']);
-            $table->index('reviewer_id');
+            $table->foreignId('product_id')->references('id')->on('products');
+            $table->foreignId('reviewer_id')->references('id')->on('users');
+            $table->foreignId('order_id')->references('id')->on('orders');
+            // $table->index(['product_id', 'is_verified']);
+            // $table->index('reviewer_id');
 
-            $table->check('rating >= 1 AND rating <= 5');
+            // $table->check('rating >= 1 AND rating <= 5');
         });
     }
 

@@ -8,8 +8,8 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('farmer_profiles', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->uuid('farmer_id')->unique();
+            $table->id();
+            // $table->uuid('farmer_id')->unique();
             $table->string('farm_name', 100)->nullable();
             $table->decimal('farm_size_hectares', 8, 2)->nullable();
             $table->integer('farming_experience_years')->nullable();
@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->json('farming_methods')->nullable();
             $table->timestamps();
 
-            $table->foreign('farmer_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('farmer_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

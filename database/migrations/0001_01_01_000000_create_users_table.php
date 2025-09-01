@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('name', 100);
             $table->enum('user_type', ['farmer', 'buyer', 'transporter']);
             $table->string('profile_image_url', 500)->nullable();
-            $table->point('location')->nullable();
+            $table->geometry('location', 'point')->nullable();
             $table->text('address')->nullable();
             $table->boolean('is_verified')->default(false);
             $table->decimal('rating', 2, 1)->nullable();
@@ -29,8 +29,8 @@ return new class extends Migration {
             $table->timestamps();
             $table->softDeletes();
 
-            $table->index(['user_type', 'status']);
-            $table->index('location');
+            // $table->index(['user_type', 'status']);
+            // $table->index('location');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

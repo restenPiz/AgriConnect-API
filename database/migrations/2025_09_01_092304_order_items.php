@@ -8,21 +8,21 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('order_items', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->uuid('order_id');
-            $table->uuid('product_id');
-            $table->uuid('farmer_id');
+            $table->id();
+            // $table->uuid('order_id');
+            // $table->uuid('product_id');
+            // $table->uuid('farmer_id');
             $table->decimal('quantity', 10, 2);
             $table->decimal('unit_price', 10, 2);
             $table->decimal('total_price', 10, 2);
             $table->enum('status', ['pending', 'confirmed', 'delivered']);
             $table->timestamps();
 
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
-            $table->foreign('product_id')->references('id')->on('products');
-            $table->foreign('farmer_id')->references('id')->on('users');
-            $table->index(['order_id', 'status']);
-            $table->index('farmer_id');
+            $table->foreignId('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->foreignId('product_id')->references('id')->on('products');
+            $table->foreignId('farmer_id')->references('id')->on('users');
+            // $table->index(['order_id', 'status']);
+            // $table->index('farmer_id');
         });
     }
 

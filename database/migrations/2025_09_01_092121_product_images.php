@@ -8,8 +8,8 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('product_images', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->uuid('product_id');
+            $table->id();
+            // $table->uuid('product_id');
             $table->string('image_url', 500);
             $table->integer('image_order')->default(0);
             $table->string('alt_text', 255)->nullable();
@@ -17,8 +17,8 @@ return new class extends Migration {
             $table->integer('file_size')->nullable();
             $table->timestamps();
 
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->index(['product_id', 'image_order']);
+            $table->foreignId('product_id')->references('id')->on('products')->onDelete('cascade');
+            // $table->index(['product_id', 'image_order']);
         });
     }
 

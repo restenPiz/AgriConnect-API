@@ -8,8 +8,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->uuid('farmer_id');
+            $table->id();
             $table->string('name', 100);
             $table->text('description')->nullable();
             $table->decimal('price', 10, 2);
@@ -17,7 +16,7 @@ return new class extends Migration {
             $table->decimal('available_quantity', 10, 2);
             $table->json('image_urls')->nullable();
             $table->enum('category', ['vegetables', 'fruits', 'grains', 'legumes', 'herbs', 'roots', 'dairy', 'meat']);
-            $table->point('location')->nullable();
+            $table->geometry('location', 'point')->nullable();
             $table->date('harvest_date')->nullable();
             $table->date('expiry_date')->nullable();
             $table->boolean('is_organic')->default(false);
@@ -29,11 +28,11 @@ return new class extends Migration {
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('farmer_id')->references('id')->on('users');
-            $table->index(['farmer_id', 'status']);
-            $table->index(['category', 'status']);
-            $table->index('location');
-            $table->index('expiry_date');
+            $table->foreignId('farmer_id')->references('id')->on('users');
+            // $table->index(['farmer_id', 'status']);
+            // $table->index(['category', 'status']);
+            // $table->index('location');
+            // $table->index('expiry_date');
         });
     }
 
