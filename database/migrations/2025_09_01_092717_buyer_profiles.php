@@ -9,7 +9,6 @@ return new class extends Migration {
     {
         Schema::create('buyer_profiles', function (Blueprint $table) {
             $table->id();
-            // $table->uuid('buyer_id')->unique();
             $table->string('business_name', 100)->nullable();
             $table->enum('business_type', ['restaurant', 'grocery', 'individual', 'wholesaler']);
             $table->string('tax_number', 50)->nullable();

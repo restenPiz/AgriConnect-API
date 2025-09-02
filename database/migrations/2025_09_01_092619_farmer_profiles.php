@@ -9,7 +9,6 @@ return new class extends Migration {
     {
         Schema::create('farmer_profiles', function (Blueprint $table) {
             $table->id();
-            // $table->uuid('farmer_id')->unique();
             $table->string('farm_name', 100)->nullable();
             $table->decimal('farm_size_hectares', 8, 2)->nullable();
             $table->integer('farming_experience_years')->nullable();

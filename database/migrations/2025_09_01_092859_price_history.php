@@ -9,7 +9,6 @@ return new class extends Migration {
     {
         Schema::create('price_history', function (Blueprint $table) {
             $table->id();
-            // $table->uuid('product_id');
             $table->decimal('price', 10, 2);
             $table->date('date_recorded');
             $table->json('market_conditions')->nullable();
