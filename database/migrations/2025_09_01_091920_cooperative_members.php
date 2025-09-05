@@ -19,7 +19,6 @@ return new class extends Migration {
             $table->foreignId('cooperative_id')->references('id')->on('cooperatives');
             $table->foreignId('farmer_id')->references('id')->on('users');
             $table->unique(['cooperative_id', 'farmer_id']);
-            // $table->index(['cooperative_id', 'status']);
         });
     }
 
