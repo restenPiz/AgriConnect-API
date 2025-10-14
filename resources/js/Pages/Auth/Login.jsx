@@ -71,7 +71,7 @@ export default function Login() {
                             </Label>
                         </div>
 
-                        <Button
+                        <Button style={{ backgroundColor: '#4CAF50', borderColor: '#4CAF50' , color: 'white' }}
                             type="submit"
                             className="w-full"
                             disabled={processing}
@@ -80,7 +80,7 @@ export default function Login() {
                         </Button>
                     </form>
 
-                    <div className="mt-4 text-center text-sm">
+                    {/* <div className="mt-4 text-center text-sm">
                         <a href="/forgot-password" className="text-primary hover:underline">
                             Forgot your password?
                         </a>
@@ -91,7 +91,7 @@ export default function Login() {
                         <a href="/register" className="text-primary hover:underline font-medium">
                             Sign up
                         </a>
-                    </div>
+                    </div> */}
                 </CardContent>
             </Card>
         </div>
