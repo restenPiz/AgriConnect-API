@@ -15,17 +15,40 @@ class LoginController extends Controller
     }
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
 
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-            // Generate token or session as needed
-            return Inertia::render('Pages/Dashboard', ['user' => $user]);
+        // Debug: Check if user exists
+        $user = \App\Models\User::where('email', $request->email)->first();
+
+        if (!$user) {
+            return response()->json([
+                'message' => 'User not found with this email',
+                'email' => $request->email,
+            ], 404);
         }
 
-        return response()->json([
-            'message' => 'Invalid credentials',
-        ], 401);
+        // Debug: Check password hash
+        dd([
+            'user_exists' => true,
+            'email' => $user->email,
+            'stored_password_hash' => $user->password,
+            'input_password' => $request->password,
+            'hash_check' => \Hash::check($request->password, $user->password),
+        ]);
+
+        if (Auth::attempt($request->only('email', 'password'))) {
+            return response()->json([
+                'user' => Auth::user(),
+                'message' => 'Successfully logged in',
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'Invalid credentials',
+            ], 401);
+        }
     }
     public function logout(Request $request)
     {
