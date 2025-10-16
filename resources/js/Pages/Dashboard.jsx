@@ -1,5 +1,15 @@
 import { Link, router,usePage } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
+import {
+    NavigationMenu,
+    NavigationMenuContent,
+    NavigationMenuIndicator,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList,
+    NavigationMenuTrigger,
+    NavigationMenuViewport,
+} from "@/components/ui/navigation-menu";
 
 export default function Dashboard({ auth }) {
 
@@ -13,6 +23,20 @@ export default function Dashboard({ auth }) {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16 items-center">
                         <h1 className="text-xl font-bold">AgriConnect</h1>
+
+                        {/*Start with navigation item*/}
+                        <NavigationMenu>
+                            <NavigationMenuList>
+                                <NavigationMenuItem>
+                                    <NavigationMenuLink>
+                                        <Link href="/docs">Inicio</Link>
+                                        <Link href="/docs">Inicio</Link>
+                                    </NavigationMenuLink>
+                                </NavigationMenuItem>
+                            </NavigationMenuList>
+                        </NavigationMenu>
+                        {/*End of the navigation item*/}
+
                         <div className="flex items-center gap-4">
                             <span className="text-sm text-gray-600">
                                 {auth.user?.name || auth.user?.email}
