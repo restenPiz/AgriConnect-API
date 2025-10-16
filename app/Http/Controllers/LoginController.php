@@ -42,8 +42,6 @@ class LoginController extends Controller
     {
         Auth::logout();
 
-        return response()->json([
-            'message' => 'Logged out successfully',
-        ]);
+        return Inertia::render('Pages/Auth/Login');
     }
 }

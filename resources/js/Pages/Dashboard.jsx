@@ -1,12 +1,10 @@
 import { Link, router,usePage } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
 
-export default function Dashboard() {
-
-    const { auth } = usePage().props;
+export default function Dashboard({ auth }) {
 
     const handleLogout = () => {
-        router.post('/logout');
+        router.get('/logout');
     };
 
     return (
