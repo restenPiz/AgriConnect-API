@@ -11,7 +11,9 @@ import {
     NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 
-export default function Dashboard({ auth }) {
+export default function Dashboard() {
+
+    const { auth } = usePage().props
 
     const handleLogout = () => {
         router.get('/logout');
@@ -30,7 +32,6 @@ export default function Dashboard({ auth }) {
                                 <NavigationMenuItem>
                                     <NavigationMenuLink>
                                         <Link href="/docs">Inicio</Link>
-                                        <Link href="/docs">Inicio</Link>
                                     </NavigationMenuLink>
                                 </NavigationMenuItem>
                             </NavigationMenuList>
@@ -39,7 +40,7 @@ export default function Dashboard({ auth }) {
 
                         <div className="flex items-center gap-4">
                             <span className="text-sm text-gray-600">
-                                {auth.user?.name || auth.user?.email}
+                                {auth.user.name || auth.user.email}
                             </span>
                             <Button onClick={handleLogout} variant="outline">
                                 Logout
