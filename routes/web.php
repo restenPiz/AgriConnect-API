@@ -9,4 +9,14 @@ Route::get('/', [LoginController::class, 'index']);
 
 //*Authentication routes
 Route::post('/login', [LoginController::class, 'login']);
-Route::post('/logout', [LoginController::class, 'logout']);
+Route::get('/logout', [LoginController::class, 'logout']);
+
+//*User Authenticated routes
+Route::middleware('auth')->group(function () {
+    Route::get('/logout', [LoginController::class, 'logout']);
+
+    Route::get('/dashboard', function () {
+        return Inertia::render('Pages/Dashboard', ['auth' => auth()->user()]);
+    })->name('dashboard');
+});
+

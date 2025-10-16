@@ -30,20 +30,8 @@ class LoginController extends Controller
             ], 404);
         }
 
-        // Debug: Check password hash
-        dd([
-            'user_exists' => true,
-            'email' => $user->email,
-            'stored_password_hash' => $user->password,
-            'input_password' => $request->password,
-            'hash_check' => \Hash::check($request->password, $user->password),
-        ]);
-
         if (Auth::attempt($request->only('email', 'password'))) {
-            return response()->json([
-                'user' => Auth::user(),
-                'message' => 'Successfully logged in',
-            ]);
+            return redirect()->intended('/dashboard');
         } else {
             return response()->json([
                 'message' => 'Invalid credentials',
