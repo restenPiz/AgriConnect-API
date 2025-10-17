@@ -15,7 +15,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/logout', [LoginController::class, 'logout']);
 
     Route::get('/dashboard', function () {
-        return Inertia::render('Pages/Dashboard', ['auth' => auth()->user()]);
+        return Inertia::render('Pages/Dashboard');
     })->name('dashboard');
 });
 
