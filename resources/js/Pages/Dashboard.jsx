@@ -88,7 +88,7 @@ export default function Dashboard({ auth }) {
                                 <span className="font-medium">Inicio</span>
                             </button>
                             <button
-                                onClick={() => handleNavigation('/products')}
+                                onClick={() => handleNavigation('/product')}
                                 className="flex items-center gap-2 text-gray-600 hover:text-green-600 transition-colors"
                             >
                                 <Package className="h-4 w-4" />
