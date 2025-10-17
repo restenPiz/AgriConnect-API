@@ -1,3 +1,4 @@
+import { Link, router, usePage } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
 import {
     Home,
@@ -15,15 +16,12 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 
-export default function Dashboard({ auth }) {
+export default function Dashboard() {
+    const { auth } = usePage().props;
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const handleLogout = () => {
-        window.location.href = '/logout';
-    };
-
-    const handleNavigation = (path) => {
-        window.location.href = path;
+        router.get('/logout');
     };
 
     const stats = [
@@ -78,36 +76,36 @@ export default function Dashboard({ auth }) {
                             <h1 className="text-xl font-bold text-gray-900">AgriConnect</h1>
                         </div>
 
-                        {/* Desktop Navigation */}
+                        {/* Desktop Navigation - Using Inertia Link */}
                         <div className="hidden md:flex items-center gap-6">
-                            <button
-                                onClick={() => handleNavigation('/dashboard')}
+                            <Link
+                                href="/dashboard"
                                 className="flex items-center gap-2 text-gray-700 hover:text-green-600 transition-colors"
                             >
                                 <Home className="h-4 w-4" />
                                 <span className="font-medium">Inicio</span>
-                            </button>
-                            <button
-                                onClick={() => handleNavigation('/product')}
+                            </Link>
+                            <Link
+                                href="/product"
                                 className="flex items-center gap-2 text-gray-600 hover:text-green-600 transition-colors"
                             >
                                 <Package className="h-4 w-4" />
                                 <span>Products</span>
-                            </button>
-                            <button
-                                onClick={() => handleNavigation('/farmers')}
+                            </Link>
+                            <Link
+                                href="/farmers"
                                 className="flex items-center gap-2 text-gray-600 hover:text-green-600 transition-colors"
                             >
                                 <Users className="h-4 w-4" />
                                 <span>Farmers</span>
-                            </button>
-                            <button
-                                onClick={() => handleNavigation('/analytics')}
+                            </Link>
+                            <Link
+                                href="/analytics"
                                 className="flex items-center gap-2 text-gray-600 hover:text-green-600 transition-colors"
                             >
                                 <TrendingUp className="h-4 w-4" />
                                 <span>Analytics</span>
-                            </button>
+                            </Link>
                         </div>
 
                         {/* Right Side Actions */}
@@ -119,11 +117,11 @@ export default function Dashboard({ auth }) {
 
                             <div className="hidden md:flex items-center gap-3 pl-3 border-l border-gray-200">
                                 <div className="text-right">
-                                    <p className="text-sm font-medium text-gray-900">{auth?.user?.name || 'User'}</p>
-                                    <p className="text-xs text-gray-500">{auth?.user?.email || 'user@example.com'}</p>
+                                    <p className="text-sm font-medium text-gray-900">{auth.user.name}</p>
+                                    <p className="text-xs text-gray-500">{auth.user.email}</p>
                                 </div>
                                 <div className="h-10 w-10 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white font-semibold">
-                                    {auth?.user?.name?.charAt(0).toUpperCase() || 'U'}
+                                    {auth.user.name?.charAt(0).toUpperCase() || 'U'}
                                 </div>
                             </div>
 
@@ -144,31 +142,31 @@ export default function Dashboard({ auth }) {
                         </div>
                     </div>
 
-                    {/* Mobile Menu */}
+                    {/* Mobile Menu - Using Inertia Link */}
                     {isMobileMenuOpen && (
                         <div className="md:hidden py-4 border-t border-gray-200">
                             <div className="flex flex-col gap-3">
-                                <button
-                                    onClick={() => handleNavigation('/dashboard')}
+                                <Link
+                                    href="/dashboard"
                                     className="flex items-center gap-2 px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg"
                                 >
                                     <Home className="h-4 w-4" />
                                     <span>Inicio</span>
-                                </button>
-                                <button
-                                    onClick={() => handleNavigation('/products')}
+                                </Link>
+                                <Link
+                                    href="/product"
                                     className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:bg-gray-50 rounded-lg"
                                 >
                                     <Package className="h-4 w-4" />
                                     <span>Products</span>
-                                </button>
-                                <button
-                                    onClick={() => handleNavigation('/farmers')}
+                                </Link>
+                                <Link
+                                    href="/farmers"
                                     className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:bg-gray-50 rounded-lg"
                                 >
                                     <Users className="h-4 w-4" />
                                     <span>Farmers</span>
-                                </button>
+                                </Link>
                                 <Button onClick={handleLogout} variant="outline" className="justify-start gap-2">
                                     <LogOut className="h-4 w-4" />
                                     Logout
@@ -184,7 +182,7 @@ export default function Dashboard({ auth }) {
                 {/* Welcome Section */}
                 <div className="mb-8">
                     <h2 className="text-3xl font-bold text-gray-900 mb-2">
-                        Welcome back, {auth?.user?.name?.split(' ')[0] || 'User'}! 👋
+                        Welcome back, {auth.user.name?.split(' ')[0] || 'User'}! 👋
                     </h2>
                     <p className="text-gray-600">Here's what's happening with your agricultural platform today.</p>
                 </div>
@@ -232,19 +230,34 @@ export default function Dashboard({ auth }) {
                     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                         <h3 className="text-lg font-bold text-gray-900 mb-6">Quick Actions</h3>
                         <div className="space-y-3">
-                            <Button className="w-full justify-start gap-2 bg-green-600 hover:bg-green-700">
+                            <Button
+                                onClick={() => router.visit('/products/create')}
+                                className="w-full justify-start gap-2 bg-green-600 hover:bg-green-700"
+                            >
                                 <Package className="h-4 w-4" />
                                 Add New Product
                             </Button>
-                            <Button variant="outline" className="w-full justify-start gap-2">
+                            <Button
+                                onClick={() => router.visit('/farmers')}
+                                variant="outline"
+                                className="w-full justify-start gap-2"
+                            >
                                 <Users className="h-4 w-4" />
                                 Manage Farmers
                             </Button>
-                            <Button variant="outline" className="w-full justify-start gap-2">
+                            <Button
+                                onClick={() => router.visit('/reports')}
+                                variant="outline"
+                                className="w-full justify-start gap-2"
+                            >
                                 <TrendingUp className="h-4 w-4" />
                                 View Reports
                             </Button>
-                            <Button variant="outline" className="w-full justify-start gap-2">
+                            <Button
+                                onClick={() => router.visit('/settings')}
+                                variant="outline"
+                                className="w-full justify-start gap-2"
+                            >
                                 <Settings className="h-4 w-4" />
                                 Settings
                             </Button>
