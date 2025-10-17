@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\AnalyticController;
+use App\Http\Controllers\FarmerController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductController;
 
 //*First route
 Route::get('/', [LoginController::class, 'index']);
@@ -17,5 +20,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Pages/Dashboard');
     })->name('dashboard');
+
+    //*Product, Farmers and Anylitcs routs
+    Route::get('/product', [ProductController::class, 'index']);
+
+    Route::get('/farmer', [FarmerController::class, 'index']);
+
+    Route::get('/analytics', [AnalyticController::class, 'index']);
 });
 
