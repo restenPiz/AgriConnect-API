@@ -180,6 +180,10 @@ export default function Product() {
             {/* Main Content */}
             <main className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
 
+                {/*Start with the product tables*/}
+
+                {/*End of the table*/}
+
             </main>
         </div>
     );
