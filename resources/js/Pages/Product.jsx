@@ -14,6 +14,7 @@ import {
     Download,
     Plus,
     MoreVertical,
+     TrendingUp,
     Edit,
     Trash2,
     Eye,
@@ -150,6 +151,13 @@ export default function Product() {
                                 <Users className="h-4 w-4" />
                                 <span>Farmers</span>
                             </Link>
+                            <Link
+                                href="/analytics"
+                                className="flex items-center gap-2 text-gray-600 hover:text-green-600 transition-colors"
+                            >
+                                <TrendingUp className="h-4 w-4" />
+                                <span>Analytics</span>
+                            </Link>
                         </div>
 
                         <div className="flex items-center gap-3">
@@ -199,6 +207,10 @@ export default function Product() {
                                     <Users className="h-4 w-4" />
                                     <span>Farmers</span>
                                 </Link>
+                                <Link href="/farmers" className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:bg-gray-50 rounded-lg">
+                                    <Users className="h-4 w-4" />
+                                    <span>Farmers</span>
+                                </Link>
                                 <Button onClick={handleLogout} variant="outline" className="justify-start gap-2">
                                     <LogOut className="h-4 w-4" />
                                     Logout
@@ -216,6 +228,44 @@ export default function Product() {
                     <h2 className="text-3xl font-bold text-gray-900 mb-2">Products</h2>
                     <p className="text-gray-600">Manage your agricultural products inventory</p>
                 </div>
+
+                {/* Quick Stats */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6">
+                    <div className="bg-white p-4 rounded-lg border border-gray-200">
+                        <div className="flex items-center gap-2 mb-2">
+                            <Package className="h-4 w-4 text-blue-600" />
+                            <p className="text-sm text-gray-600">Total Products</p>
+                        </div>
+                        <p className="text-2xl font-bold text-gray-900">{products.length}</p>
+                    </div>
+                    <div className="bg-white p-4 rounded-lg border border-gray-200">
+                        <div className="flex items-center gap-2 mb-2">
+                            <CheckCircle className="h-4 w-4 text-green-600" />
+                            <p className="text-sm text-gray-600">Active</p>
+                        </div>
+                        <p className="text-2xl font-bold text-gray-900">
+                            {products.filter(p => p.status === 'active').length}
+                        </p>
+                    </div>
+                    <div className="bg-white p-4 rounded-lg border border-gray-200">
+                        <div className="flex items-center gap-2 mb-2">
+                            <Clock className="h-4 w-4 text-yellow-600" />
+                            <p className="text-sm text-gray-600">Low Stock</p>
+                        </div>
+                        <p className="text-2xl font-bold text-gray-900">
+                            {products.filter(p => p.status === 'low_stock').length}
+                        </p>
+                    </div>
+                    <div className="bg-white p-4 rounded-lg border border-gray-200">
+                        <div className="flex items-center gap-2 mb-2">
+                            <XCircle className="h-4 w-4 text-red-600" />
+                            <p className="text-sm text-gray-600">Out of Stock</p>
+                        </div>
+                        <p className="text-2xl font-bold text-gray-900">
+                            {products.filter(p => p.status === 'out_of_stock').length}
+                        </p>
+                    </div>
+                </div><br></br>
 
                 {/* Action Bar */}
                 <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-6">
@@ -360,43 +410,6 @@ export default function Product() {
                     </div>
                 </div>
 
-                {/* Quick Stats */}
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6">
-                    <div className="bg-white p-4 rounded-lg border border-gray-200">
-                        <div className="flex items-center gap-2 mb-2">
-                            <Package className="h-4 w-4 text-blue-600" />
-                            <p className="text-sm text-gray-600">Total Products</p>
-                        </div>
-                        <p className="text-2xl font-bold text-gray-900">{products.length}</p>
-                    </div>
-                    <div className="bg-white p-4 rounded-lg border border-gray-200">
-                        <div className="flex items-center gap-2 mb-2">
-                            <CheckCircle className="h-4 w-4 text-green-600" />
-                            <p className="text-sm text-gray-600">Active</p>
-                        </div>
-                        <p className="text-2xl font-bold text-gray-900">
-                            {products.filter(p => p.status === 'active').length}
-                        </p>
-                    </div>
-                    <div className="bg-white p-4 rounded-lg border border-gray-200">
-                        <div className="flex items-center gap-2 mb-2">
-                            <Clock className="h-4 w-4 text-yellow-600" />
-                            <p className="text-sm text-gray-600">Low Stock</p>
-                        </div>
-                        <p className="text-2xl font-bold text-gray-900">
-                            {products.filter(p => p.status === 'low_stock').length}
-                        </p>
-                    </div>
-                    <div className="bg-white p-4 rounded-lg border border-gray-200">
-                        <div className="flex items-center gap-2 mb-2">
-                            <XCircle className="h-4 w-4 text-red-600" />
-                            <p className="text-sm text-gray-600">Out of Stock</p>
-                        </div>
-                        <p className="text-2xl font-bold text-gray-900">
-                            {products.filter(p => p.status === 'out_of_stock').length}
-                        </p>
-                    </div>
-                </div>
             </main>
         </div>
     );
