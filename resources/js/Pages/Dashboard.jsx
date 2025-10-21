@@ -80,10 +80,10 @@ export default function Dashboard() {
                         <div className="hidden md:flex items-center gap-6">
                             <Link
                                 href="/dashboard"
-                                className="flex items-center gap-2 text-gray-700 hover:text-green-600 transition-colors"
+                                className="flex items-center gap-2 text-green-600 transition-colors font-medium"
                             >
                                 <Home className="h-4 w-4" />
-                                <span className="font-medium">Inicio</span>
+                                <span>Inicio</span>
                             </Link>
                             <Link
                                 href="/product"
