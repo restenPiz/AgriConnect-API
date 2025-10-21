@@ -24,7 +24,7 @@ Route::middleware('auth')->group(function () {
     //*Product, Farmers and Anylitcs routs
     Route::get('/product', [ProductController::class, 'index']);
 
-    Route::get('/farmer', [FarmerController::class, 'index']);
+    Route::get('/farmers', [FarmerController::class, 'index']);
 
     Route::get('/analytics', [AnalyticController::class, 'index']);
 });
