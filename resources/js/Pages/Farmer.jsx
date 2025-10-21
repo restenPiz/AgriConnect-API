@@ -379,13 +379,13 @@ export default function Farmer() {
                                                 {getStatusBadge(farmer.status)}
                                             </td>
                                             <td className="px-6 py-4 text-right">
-                                                <DropdownMenu>
+                                                <DropdownMenu className="bg-white">
                                                     <DropdownMenuTrigger asChild>
                                                         <Button variant="ghost" size="icon" className="h-8 w-8">
                                                             <MoreVertical className="h-4 w-4" />
                                                         </Button>
                                                     </DropdownMenuTrigger>
-                                                    <DropdownMenuContent align="end" className="w-48">
+                                                    <DropdownMenuContent align="end" className="w-48 bg-white border border-gray-200 shadow-lg rounded-md">
                                                         <DropdownMenuItem className="gap-2 cursor-pointer">
                                                             <Eye className="h-4 w-4" />
                                                             View Profile
