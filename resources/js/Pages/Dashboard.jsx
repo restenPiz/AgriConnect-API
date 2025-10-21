@@ -110,6 +110,12 @@ export default function Dashboard() {
 
                         {/* Right Side Actions */}
                         <div className="flex items-center gap-3">
+
+                            <Button variant="ghost" size="icon" className="relative hidden md:flex">
+                                <Settings className="h-5 w-5 text-gray-600" />
+                                <span className="absolute top-1 right-1 h-2 w-2 rounded-full"></span>
+                            </Button>
+
                             <Button variant="ghost" size="icon" className="relative hidden md:flex">
                                 <Bell className="h-5 w-5 text-gray-600" />
                                 <span className="absolute top-1 right-1 h-2 w-2 bg-red-500 rounded-full"></span>
@@ -235,7 +241,7 @@ export default function Dashboard() {
                                 className="w-full justify-start gap-2 bg-green-600 hover:bg-green-700"
                             >
                                 <Package className="h-4 w-4" />
-                                Add New Product
+                                Verify the Products
                             </Button>
                             <Button
                                 onClick={() => router.visit('/farmers')}

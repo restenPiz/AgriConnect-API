@@ -12,6 +12,7 @@ import {
     Search,
     Filter,
     Download,
+    Settings,
     Plus,
     MoreVertical,
      TrendingUp,
@@ -161,6 +162,12 @@ export default function Product() {
                         </div>
 
                         <div className="flex items-center gap-3">
+
+                            <Button variant="ghost" size="icon" className="relative hidden md:flex">
+                                <Settings className="h-5 w-5 text-gray-600" />
+                                <span className="absolute top-1 right-1 h-2 w-2 rounded-full"></span>
+                            </Button>
+
                             <Button variant="ghost" size="icon" className="relative hidden md:flex">
                                 <Bell className="h-5 w-5 text-gray-600" />
                                 <span className="absolute top-1 right-1 h-2 w-2 bg-red-500 rounded-full"></span>
