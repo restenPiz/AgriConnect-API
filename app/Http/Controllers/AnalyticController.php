@@ -6,5 +6,8 @@ use Illuminate\Http\Request;
 
 class AnalyticController extends Controller
 {
-    //
+    public function index()
+    {
+        return inertia('Pages/Analytics');
+    }
 }
