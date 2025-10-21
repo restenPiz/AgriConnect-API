@@ -8,7 +8,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 
 //*First route
-Route::get('/', [LoginController::class, 'index']);
+Route::get('/', [LoginController::class, 'index'])->name('login');
 
 //*Authentication routes
 Route::post('/login', [LoginController::class, 'login']);
