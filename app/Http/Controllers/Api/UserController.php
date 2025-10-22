@@ -25,7 +25,7 @@ class UserController extends Controller
 
     public function show(string $id)
     {
-        //
+        $user = User::findOrFail($id);
     }
 
     public function update(Request $request, string $id)
@@ -35,6 +35,10 @@ class UserController extends Controller
 
     public function destroy(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $user->delete();
+
+        return true;
     }
 }
