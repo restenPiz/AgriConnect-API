@@ -22,7 +22,7 @@ class AuthController extends Controller
             'address' => 'nullable|string',
         ]);
 
-        $user = User::updateOrCreate([
+        $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => $validated['password'], // Will be auto-hashed by model
@@ -33,7 +33,7 @@ class AuthController extends Controller
         ]);
 
         // Create token
-        $token = $user->createToken('auth_token')->plainTextToken;
+        // $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
             'message' => 'Conta criada com sucesso',
@@ -45,7 +45,7 @@ class AuthController extends Controller
                 'user_type' => $user->user_type,
                 'status' => $user->status,
             ],
-            'token' => $token,
+            // 'token' => $token,
         ], 201);
     }
 
