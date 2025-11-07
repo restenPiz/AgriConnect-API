@@ -22,7 +22,7 @@ class AuthController extends Controller
             'address' => 'nullable|string',
         ]);
 
-        $user = User::create([
+        $user = User::updateOrCreate([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => $validated['password'], // Will be auto-hashed by model
