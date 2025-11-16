@@ -97,10 +97,12 @@ class AuthController extends Controller
         ]);
     }
 
-    public function user(Request $request)
+    public function user($id)
     {
+        $user = User::findOrFail($id);
+
         return response()->json([
-            'user' => $request->user(),
+            'user' => $user,
         ]);
     }
 
