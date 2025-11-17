@@ -10,9 +10,6 @@ use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
-    /**
-     * Store a newly created product
-     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
