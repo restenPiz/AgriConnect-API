@@ -16,6 +16,6 @@ Route::get('/userData/{id}', [AuthController::class, 'user']);
 //* Protected routes - Requires authentication
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::get('/user/{id}', [AuthController::class, 'user']);
+    // Route::get('/user', [AuthController::class, 'user']);
     Route::post('/user/profile', [AuthController::class, 'updateProfile']);
 });
