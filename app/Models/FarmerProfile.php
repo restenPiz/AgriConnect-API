@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class FarmerProfile extends Model
 {
-    use HasFactory, HasUuids;
+    use HasFactory;
 
     protected $fillable = [
         'farmer_id',

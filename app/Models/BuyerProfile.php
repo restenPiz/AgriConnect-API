@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BuyerProfile extends Model
 {
-    use HasFactory, HasUuids;
+    use HasFactory;
 
     protected $fillable = [
         'buyer_id',

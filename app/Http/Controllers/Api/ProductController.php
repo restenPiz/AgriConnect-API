@@ -44,12 +44,9 @@ class ProductController extends Controller
                 }
             }
 
-            // Get authenticated user (farmer)
-            $farmerId = auth()->id();
-
             // Create product
             $product = Product::create([
-                'farmer_id' => $farmerId,
+                'farmer_id' => $request->farmer_id,
                 'name' => $request->name,
                 'description' => $request->description,
                 'price' => $request->price,

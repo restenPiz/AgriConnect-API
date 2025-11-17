@@ -17,6 +17,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/userData/{id}', [AuthController::class, 'user']);
     Route::post('/user/profile', [AuthController::class, 'updateProfile']);
 
-    //*Product Routes
-    Route::post('/storeProduct', [ProductController::class, 'store']);
 });
+
+//*Product Routes
+Route::post('/storeProduct', [ProductController::class, 'store']);

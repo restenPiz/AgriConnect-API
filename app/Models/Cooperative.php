@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Cooperative extends Model
 {
-    use HasFactory, HasUuids, SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'coordinator_id',
