@@ -75,9 +75,6 @@ class ProductController extends Controller
         }
     }
 
-    /**
-     * Get all products for the authenticated farmer
-     */
     public function getByFarmer($farmerId)
     {
         try {
@@ -126,9 +123,6 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Get a specific product
-     */
     public function show($id)
     {
         $product = Product::where('farmer_id', auth()->id())
@@ -140,9 +134,6 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Update a product
-     */
     public function update(Request $request, $id)
     {
         $product = Product::where('farmer_id', auth()->id())
@@ -210,13 +201,9 @@ class ProductController extends Controller
             ], 500);
         }
     }
-
-    /**
-     * Delete a product
-     */
     public function destroy($id)
     {
-        $product = Product::where('farmer_id', auth()->id())
+        $product = Product::where('farmer_id', $id)
             ->findOrFail($id);
 
         try {
