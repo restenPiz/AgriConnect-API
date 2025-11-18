@@ -24,4 +24,4 @@ Route::post('/storeProduct', [ProductController::class, 'store']);
 Route::get('/product/{id}', [ProductController::class, 'getByFarmer']);
 Route::get('/productEdit/{id}', [ProductController::class, 'edit']);
 Route::post('/productUpdate/{id}', [ProductController::class, 'update']);
-Route::post('/productDelete/{id}', [ProductController::class, 'destroy']);
+Route::delete('/productDelete/{id}', [ProductController::class, 'destroy']);
