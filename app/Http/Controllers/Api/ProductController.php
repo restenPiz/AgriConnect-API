@@ -80,7 +80,7 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Product::where('farmer_id', auth()->id());
+        $query = Product::where('farmer_id', $request->farmer_id);
 
         // Filter by status
         if ($request->has('status')) {
