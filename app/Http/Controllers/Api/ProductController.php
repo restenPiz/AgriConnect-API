@@ -78,9 +78,30 @@ class ProductController extends Controller
     /**
      * Get all products for the authenticated farmer
      */
+    public function getByFarmer($farmerId)
+    {
+        try {
+            $products = Product::where('farmer_id', $farmerId)
+                ->orderBy('created_at', 'desc')
+                ->get(); // Usar get() em vez de paginate()
+
+            return response()->json([
+                'success' => true,
+                'data' => $products
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to fetch products',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
     public function index(Request $request, $id)
     {
-        $query = Product::where('farmer_id', $id);
+        $query = Product::where('farmer_id', $id)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         // Filter by status
         if ($request->has('status')) {

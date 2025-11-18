@@ -21,4 +21,4 @@ Route::middleware('auth:sanctum')->group(function () {
 
 //*Product Routes
 Route::post('/storeProduct', [ProductController::class, 'store']);
-Route::get('/product/{id}', [ProductController::class, 'index']);
+Route::get('/product/{id}', [ProductController::class, 'getByFarmer']);
