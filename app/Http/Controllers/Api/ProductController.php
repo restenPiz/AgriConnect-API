@@ -78,9 +78,9 @@ class ProductController extends Controller
     /**
      * Get all products for the authenticated farmer
      */
-    public function index(Request $request)
+    public function index(Request $request, $id)
     {
-        $query = Product::where('farmer_id', $request->farmer_id);
+        $query = Product::where('farmer_id', $id);
 
         // Filter by status
         if ($request->has('status')) {
