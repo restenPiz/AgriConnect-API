@@ -9,7 +9,9 @@ class FarmerController extends Controller
 {
     public function index()
     {
-        $farmers = User::where('user_type', 'farmer')->get();
+        $farmers = User::where('user_type', 'farmer')
+            ->where('name', '!=', 'Admin')
+            ->get();
 
         return inertia('Pages/Farmer', [
             'farmers' => $farmers,
