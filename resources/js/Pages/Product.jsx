@@ -241,10 +241,6 @@ export default function Product({ products }) {
                                 <Download className="h-4 w-4" />
                                 <span className="hidden sm:inline">Export</span>
                             </Button>
-                            <Button size="sm" className="gap-2 bg-green-600 hover:bg-green-700">
-                                <Plus className="h-4 w-4" />
-                                <span className="hidden sm:inline">Add Product</span>
-                            </Button>
                         </div>
                     </div>
                 </div>

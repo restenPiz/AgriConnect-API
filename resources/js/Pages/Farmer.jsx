@@ -36,7 +36,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Badge } from "@/components/ui/badge"
 
-export default function Farmer() {
+export default function Farmer({ farmers }) {
     const { auth } = usePage().props;
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
@@ -44,70 +44,6 @@ export default function Farmer() {
     const handleLogout = () => {
         router.get('/logout');
     };
-
-    // Sample farmer data - replace with your actual data from props
-    const farmers = [
-        {
-            id: 1,
-            name: 'João Silva',
-            email: 'joao.silva@email.com',
-            phone: '+258 84 123 4567',
-            location: 'Beira, Sofala',
-            products_count: 15,
-            rating: 4.8,
-            status: 'active',
-            verified: true,
-            avatar: '👨‍🌾'
-        },
-        {
-            id: 2,
-            name: 'Maria Santos',
-            email: 'maria.santos@email.com',
-            phone: '+258 84 234 5678',
-            location: 'Chimoio, Manica',
-            products_count: 23,
-            rating: 4.9,
-            status: 'active',
-            verified: true,
-            avatar: '👩‍🌾'
-        },
-        {
-            id: 3,
-            name: 'Pedro Mendes',
-            email: 'pedro.mendes@email.com',
-            phone: '+258 84 345 6789',
-            location: 'Nampula',
-            products_count: 8,
-            rating: 4.5,
-            status: 'pending',
-            verified: false,
-            avatar: '👨‍🌾'
-        },
-        {
-            id: 4,
-            name: 'Ana Costa',
-            email: 'ana.costa@email.com',
-            phone: '+258 84 456 7890',
-            location: 'Tete',
-            products_count: 31,
-            rating: 5.0,
-            status: 'active',
-            verified: true,
-            avatar: '👩‍🌾'
-        },
-        {
-            id: 5,
-            name: 'Carlos Rodrigues',
-            email: 'carlos.r@email.com',
-            phone: '+258 84 567 8901',
-            location: 'Maputo',
-            products_count: 0,
-            rating: 0,
-            status: 'inactive',
-            verified: false,
-            avatar: '👨‍🌾'
-        },
-    ];
 
     const getStatusBadge = (status) => {
         const statusConfig = {
