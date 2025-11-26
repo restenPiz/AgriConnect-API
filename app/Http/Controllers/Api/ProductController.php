@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -137,6 +138,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         // dd($request->all());
+        Log::info($request->all());
         $product = Product::findOrFail($id);
 
         $validator = Validator::make($request->all(), [
