@@ -185,7 +185,7 @@ export default function Product({ products }) {
                             <p className="text-sm text-gray-600">Total Products</p>
                         </div>
                         <p className="text-2xl font-bold text-gray-900">
-                            {/* {products.length} */}
+                            {products.length}
                         </p>
                     </div>
                     <div className="bg-white p-4 rounded-lg border border-gray-200">
@@ -194,7 +194,7 @@ export default function Product({ products }) {
                             <p className="text-sm text-gray-600">Active</p>
                         </div>
                         <p className="text-2xl font-bold text-gray-900">
-                            {/* {products.filter(p => p.status === 'active').length} */}
+                            {products.filter(p => p.status === 'active').length}
                         </p>
                     </div>
                     <div className="bg-white p-4 rounded-lg border border-gray-200">
@@ -203,7 +203,7 @@ export default function Product({ products }) {
                             <p className="text-sm text-gray-600">Low Stock</p>
                         </div>
                         <p className="text-2xl font-bold text-gray-900">
-                            {/* {products.filter(p => p.status === 'low_stock').length} */}
+                            {products.filter(p => p.status === 'low_stock').length}
                         </p>
                     </div>
                     <div className="bg-white p-4 rounded-lg border border-gray-200">
@@ -212,7 +212,7 @@ export default function Product({ products }) {
                             <p className="text-sm text-gray-600">Out of Stock</p>
                         </div>
                         <p className="text-2xl font-bold text-gray-900">
-                            {/* {products.filter(p => p.status === 'out_of_stock').length} */}
+                            {products.filter(p => p.status === 'out_of_stock').length}
                         </p>
                     </div>
                 </div><br></br>
