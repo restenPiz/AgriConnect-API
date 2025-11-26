@@ -137,7 +137,6 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        // dd($request->all());
         Log::info($request->all());
         Log::info('Updating product with ID: ' . $id);
         $product = Product::findOrFail($id);
