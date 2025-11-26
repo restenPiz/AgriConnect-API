@@ -32,7 +32,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Badge } from "@/components/ui/badge"
 
-export default function Product() {
+export default function Product({ products }) {
     const { auth } = usePage().props;
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
@@ -40,65 +40,6 @@ export default function Product() {
     const handleLogout = () => {
         router.get('/logout');
     };
-
-    // Sample product data - replace with your actual data from props
-    const products = [
-        {
-            id: 1,
-            name: 'Organic Tomatoes',
-            farmer: 'John Doe',
-            category: 'Vegetables',
-            price: 45.00,
-            stock: 250,
-            unit: 'kg',
-            status: 'active',
-            image: '🍅'
-        },
-        {
-            id: 2,
-            name: 'Fresh Corn',
-            farmer: 'Maria Silva',
-            category: 'Grains',
-            price: 30.00,
-            stock: 150,
-            unit: 'kg',
-            status: 'active',
-            image: '🌽'
-        },
-        {
-            id: 3,
-            name: 'Green Lettuce',
-            farmer: 'Pedro Santos',
-            category: 'Vegetables',
-            price: 25.00,
-            stock: 80,
-            unit: 'kg',
-            status: 'low_stock',
-            image: '🥬'
-        },
-        {
-            id: 4,
-            name: 'Sweet Potatoes',
-            farmer: 'Ana Costa',
-            category: 'Tubers',
-            price: 35.00,
-            stock: 0,
-            unit: 'kg',
-            status: 'out_of_stock',
-            image: '🍠'
-        },
-        {
-            id: 5,
-            name: 'Fresh Carrots',
-            farmer: 'Carlos Mendes',
-            category: 'Vegetables',
-            price: 28.00,
-            stock: 320,
-            unit: 'kg',
-            status: 'active',
-            image: '🥕'
-        },
-    ];
 
     const getStatusBadge = (status) => {
         const statusConfig = {
@@ -243,7 +184,9 @@ export default function Product() {
                             <Package className="h-4 w-4 text-blue-600" />
                             <p className="text-sm text-gray-600">Total Products</p>
                         </div>
-                        <p className="text-2xl font-bold text-gray-900">{products.length}</p>
+                        <p className="text-2xl font-bold text-gray-900">
+                            {/* {products.length} */}
+                        </p>
                     </div>
                     <div className="bg-white p-4 rounded-lg border border-gray-200">
                         <div className="flex items-center gap-2 mb-2">
@@ -251,7 +194,7 @@ export default function Product() {
                             <p className="text-sm text-gray-600">Active</p>
                         </div>
                         <p className="text-2xl font-bold text-gray-900">
-                            {products.filter(p => p.status === 'active').length}
+                            {/* {products.filter(p => p.status === 'active').length} */}
                         </p>
                     </div>
                     <div className="bg-white p-4 rounded-lg border border-gray-200">
@@ -260,7 +203,7 @@ export default function Product() {
                             <p className="text-sm text-gray-600">Low Stock</p>
                         </div>
                         <p className="text-2xl font-bold text-gray-900">
-                            {products.filter(p => p.status === 'low_stock').length}
+                            {/* {products.filter(p => p.status === 'low_stock').length} */}
                         </p>
                     </div>
                     <div className="bg-white p-4 rounded-lg border border-gray-200">
@@ -269,7 +212,7 @@ export default function Product() {
                             <p className="text-sm text-gray-600">Out of Stock</p>
                         </div>
                         <p className="text-2xl font-bold text-gray-900">
-                            {products.filter(p => p.status === 'out_of_stock').length}
+                            {/* {products.filter(p => p.status === 'out_of_stock').length} */}
                         </p>
                     </div>
                 </div><br></br>
