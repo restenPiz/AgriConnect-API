@@ -139,6 +139,7 @@ class ProductController extends Controller
     {
         // dd($request->all());
         Log::info($request->all());
+        Log::info('Updating product with ID: ' . $id);
         $product = Product::findOrFail($id);
 
         $validator = Validator::make($request->all(), [
