@@ -10,19 +10,38 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with('farmer') // Carregar relação com o farmer/user
+        $products = Product::with('farmer')
             ->orderBy('created_at', 'desc')
             ->get()
             ->map(function ($product) {
-                // Processar image_urls
-                $imageUrls = is_string($product->image_urls)
-                    ? json_decode($product->image_urls, true)
-                    : $product->image_urls;
+                // Processar image_urls com múltiplos níveis de escape
+                $imageUrls = $product->image_urls;
 
-                // Pegar primeira imagem ou emoji padrão
-                $firstImage = !empty($imageUrls) && is_array($imageUrls)
-                    ? $imageUrls[0]
-                    : '📦';
+                // Remover escapes extras
+                if (is_string($imageUrls)) {
+                    // Decodificar múltiplas vezes se necessário
+                    while (is_string($imageUrls) && (strpos($imageUrls, '\\') !== false || strpos($imageUrls, '"[') !== false)) {
+                        $imageUrls = json_decode($imageUrls, true);
+                    }
+
+                    // Se ainda for string, tentar decodificar uma vez mais
+                    if (is_string($imageUrls)) {
+                        $imageUrls = json_decode($imageUrls, true);
+                    }
+                }
+
+                // Garantir que é array
+                if (!is_array($imageUrls)) {
+                    $imageUrls = [];
+                }
+
+                // Limpar barras invertidas das URLs
+                $imageUrls = array_map(function ($url) {
+                    return str_replace(['\\/', '\\\\'], ['/', ''], $url);
+                }, $imageUrls);
+
+                // Pegar primeira imagem ou usar emoji padrão
+                $firstImage = !empty($imageUrls) ? $imageUrls[0] : '📦';
 
                 // Determinar status baseado no estoque
                 $status = $product->status;

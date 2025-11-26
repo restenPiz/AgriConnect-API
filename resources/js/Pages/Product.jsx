@@ -270,9 +270,21 @@ export default function Product({ products }) {
                                         <tr key={product.id} className="hover:bg-gray-50 transition-colors">
                                             <td className="px-6 py-4">
                                                 <div className="flex items-center gap-3">
-                                                    <div className="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center text-2xl">
-                                                        {product.image}
-                                                    </div>
+                                                     <div className="h-10 w-10 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center">
+                                                            {product.image.startsWith('/storage') ? (
+                                                                <img
+                                                                    src={product.image}
+                                                                    alt={product.name}
+                                                                    className="h-full w-full object-cover"
+                                                                    onError={(e) => {
+                                                                        e.target.style.display = 'none';
+                                                                        e.target.parentElement.innerHTML = '📦';
+                                                                    }}
+                                                                />
+                                                            ) : (
+                                                                <span className="text-2xl">{product.image}</span>
+                                                            )}
+                                                        </div>
                                                     <div>
                                                         <p className="font-medium text-gray-900">{product.name}</p>
                                                         <p className="text-sm text-gray-500">ID: #{product.id}</p>
