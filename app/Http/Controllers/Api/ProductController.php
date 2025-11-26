@@ -136,8 +136,8 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        $product = Product::where('farmer_id', auth()->id())
-            ->findOrFail($id);
+        // dd($request->all());
+        $product = Product::findOrFail($id);
 
         $validator = Validator::make($request->all(), [
             'name' => 'sometimes|string|max:100',
