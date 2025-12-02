@@ -13,6 +13,7 @@ class FarmerController extends Controller
             ->where('name', '!=', 'Admin')
             ->get();
 
+
         return inertia('Pages/Farmer', [
             'farmers' => $farmers,
         ]);
