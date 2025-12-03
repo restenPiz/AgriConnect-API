@@ -10,15 +10,10 @@ use App\Http\Controllers\Api\CooperativeController;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-//* Protected routes - Requires authentication
-Route::middleware('auth:sanctum')->group(function () {
-
-    //*Authentication Routes
-    Route::post('/logout', [AuthController::class, 'logout']);
-    Route::get('/userData/{id}', [AuthController::class, 'user']);
-    Route::post('/user/profile', [AuthController::class, 'updateProfile']);
-
-});
+//*Authentication Routes
+Route::post('/logout', [AuthController::class, 'logout']);
+Route::post('/user/profile', [AuthController::class, 'updateProfile']);
+Route::get('/userData/{id}', [AuthController::class, 'user']);
 
 //*Product Routes
 Route::post('/storeProduct', [ProductController::class, 'store']);
