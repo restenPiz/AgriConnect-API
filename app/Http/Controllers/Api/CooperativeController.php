@@ -10,9 +10,23 @@ use Illuminate\Support\Facades\Validator;
 
 class CooperativeController extends Controller
 {
-    /**
-     * Get all cooperatives
-     */
+    public function getAvailableFarmers()
+    {
+        try {
+            $farmers = \App\Models\User::where('user_type', 'farmer')
+                ->where('name', '!=', 'Admin')
+                ->select('id', 'name', 'email')
+                ->get();
+
+            return response()->json(['success' => true, 'data' => $farmers]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to fetch available farmers',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
     public function index()
     {
         try {

@@ -34,15 +34,8 @@ Route::get('/cooperatives/{id}', [CooperativeController::class, 'show']);
 Route::post('/cooperatives/{id}', [CooperativeController::class, 'update']);
 Route::delete('/cooperatives/{id}', [CooperativeController::class, 'destroy']);
 
-// Cooperative Members
+//*Cooperative Members
 Route::get('/cooperatives/{id}/members', [CooperativeController::class, 'getMembers']);
 Route::post('/cooperatives/{id}/members', [CooperativeController::class, 'addMember']);
 Route::delete('/cooperatives/{id}/members/{memberId}', [CooperativeController::class, 'removeMember']);
-
-// Available Farmers (for adding to cooperatives)
-Route::get('/farmers/available', function () {
-    $farmers = \App\Models\User::where('user_type', 'farmer')
-        ->select('id', 'name', 'email')
-        ->get();
-    return response()->json(['success' => true, 'data' => $farmers]);
-});
+Route::get('/farmers/available', [CooperativeController::class, 'getAvailableFarmers']);
