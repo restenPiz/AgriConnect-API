@@ -397,18 +397,18 @@ export default function Farmer({ farmers }) {
                                                             <Eye className="h-4 w-4" />
                                                             View Profile
                                                         </DropdownMenuItem>
-                                                        <DropdownMenuItem className="gap-2 cursor-pointer">
+                                                        {/* <DropdownMenuItem className="gap-2 cursor-pointer">
                                                             <Package className="h-4 w-4" />
                                                             View Products
-                                                        </DropdownMenuItem>
-                                                        <DropdownMenuItem className="gap-2 cursor-pointer">
+                                                        </DropdownMenuItem> */}
+                                                        {/* <DropdownMenuItem className="gap-2 cursor-pointer">
                                                             <Edit className="h-4 w-4" />
                                                             Edit Details
-                                                        </DropdownMenuItem>
-                                                        <DropdownMenuItem className="gap-2 cursor-pointer text-red-600">
+                                                        </DropdownMenuItem> */}
+                                                        {/* <DropdownMenuItem className="gap-2 cursor-pointer text-red-600">
                                                             <Trash2 className="h-4 w-4" />
                                                             Remove Farmer
-                                                        </DropdownMenuItem>
+                                                        </DropdownMenuItem> */}
                                                     </DropdownMenuContent>
                                                 </DropdownMenu>
                                             </td>
