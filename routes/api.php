@@ -28,7 +28,7 @@ Route::post('/productUpdate/{id}', [ProductController::class, 'update']);
 Route::delete('/productDelete/{id}', [ProductController::class, 'destroy']);
 
 //*Cooperative Routes
-Route::get('/cooperatives', [CooperativeController::class, 'index']);
+Route::get('/cooperative', [CooperativeController::class, 'index']);
 Route::post('/cooperatives', [CooperativeController::class, 'store']);
 Route::get('/cooperatives/{id}', [CooperativeController::class, 'show']);
 Route::post('/cooperatives/{id}', [CooperativeController::class, 'update']);
