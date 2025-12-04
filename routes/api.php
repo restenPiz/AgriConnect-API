@@ -16,7 +16,7 @@ Route::post('/user/profile', [AuthController::class, 'updateProfile']);
 Route::get('/userData/{id}', [AuthController::class, 'user']);
 
 //*Product Routes
-Route::get('/product', [ProductController::class, 'index']);
+Route::get('/product', [ProductController::class, 'products']);
 Route::post('/storeProduct', [ProductController::class, 'store']);
 Route::get('/product/{id}', [ProductController::class, 'getByFarmer']);
 Route::get('/productEdit/{id}', [ProductController::class, 'edit']);
