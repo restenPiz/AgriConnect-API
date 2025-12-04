@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function products()
     {
         try {
             $products = Product::with('farmer')
