@@ -11,6 +11,25 @@ use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
+    public function index()
+    {
+        try {
+            $products = Product::with('farmer')
+                ->orderBy('created_at', 'desc')
+                ->get();
+
+            return response()->json([
+                'success' => true,
+                'data' => $products
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to fetch products',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
