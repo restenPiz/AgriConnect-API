@@ -24,6 +24,7 @@ export default function Cooperative({ cooperatives }) {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredCooperatives.map(coop => (
                     <div key={coop.id} className="bg-white p-4 rounded-lg shadow">
+                        { /*Cooperative name */}
                         <h2 className="text-xl font-semibold mb-2">{coop.name}</h2>
                         <p className="text-gray-600 mb-4">{coop.description}</p>
                         <Link href={`/cooperatives/${coop.id}`} className="text-blue-500 hover:underline">
