@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CooperativeController;
+use App\Http\Controllers\Api\ChatController;
 
 //*Start with the api Routes
 Route::post('/register', [AuthController::class, 'register']);
@@ -35,3 +36,9 @@ Route::get('/cooperatives/{id}/members', [CooperativeController::class, 'getMemb
 Route::post('/cooperatives/{id}/members', [CooperativeController::class, 'addMember']);
 Route::delete('/cooperatives/{id}/members/{memberId}', [CooperativeController::class, 'removeMember']);
 Route::get('/farmers/available', [CooperativeController::class, 'getAvailableFarmers']);
+
+//*Chat Routes
+Route::get('/chat/farmers', [ChatController::class, 'getFarmers']);
+Route::get('/chat/buyers', [ChatController::class, 'getBuyers']);
+Route::get('/chat/user/{userId}', [ChatController::class, 'getUserDetails']);
+Route::get('/chat/conversations', [ChatController::class, 'getConversations']);
