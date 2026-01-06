@@ -12,6 +12,7 @@ class ChatController extends Controller
     /**
      * Get all farmers for chat
      */
+
     public function getFarmers(Request $request)
     {
         try {
@@ -19,12 +20,12 @@ class ChatController extends Controller
 
             $farmers = User::farmers()
                 ->active()
-                ->where('is_verified', true)
+                // ->where('is_verified', true)  // Temporarily commented out for testing
                 ->when($search, function ($query, $search) {
                     $query->where(function ($q) use ($search) {
                         $q->where('name', 'like', "%{$search}%")
-                          ->orWhere('phone_number', 'like', "%{$search}%")
-                          ->orWhere('location', 'like', "%{$search}%");
+                            ->orWhere('phone_number', 'like', "%{$search}%")
+                            ->orWhere('location', 'like', "%{$search}%");
                     });
                 })
                 ->select([
@@ -53,6 +54,8 @@ class ChatController extends Controller
         }
     }
 
+    // ...existing code...
+
     /**
      * Get all buyers (for farmers to contact)
      */
@@ -66,8 +69,8 @@ class ChatController extends Controller
                 ->when($search, function ($query, $search) {
                     $query->where(function ($q) use ($search) {
                         $q->where('name', 'like', "%{$search}%")
-                          ->orWhere('phone_number', 'like', "%{$search}%")
-                          ->orWhere('location', 'like', "%{$search}%");
+                            ->orWhere('phone_number', 'like', "%{$search}%")
+                            ->orWhere('location', 'like', "%{$search}%");
                     });
                 })
                 ->select([
