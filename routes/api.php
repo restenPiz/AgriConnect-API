@@ -42,3 +42,5 @@ Route::get('/chat/farmers', [ChatController::class, 'getFarmers']);
 Route::get('/chat/buyers', [ChatController::class, 'getBuyers']);
 Route::get('/chat/user/{userId}', [ChatController::class, 'getUserDetails']);
 Route::get('/chat/conversations', [ChatController::class, 'getConversations']);
+Route::get('/chat/farmer-by-product/{productId}', [ChatController::class, 'getFarmerByProduct']);
+
