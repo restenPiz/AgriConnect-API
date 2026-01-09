@@ -130,6 +130,44 @@ class ChatController extends Controller
         }
     }
 
+    public function getFarmerByProduct($productId)
+    {
+        try {
+            $product = \App\Models\Product::with('farmer')->findOrFail($productId);
+            $farmer = $product->farmer;
+
+            if (!$farmer) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Agricultor não encontrado para este produto'
+                ], 404);
+            }
+
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'id' => $farmer->id,
+                    'name' => $farmer->name,
+                    'email' => $farmer->email,
+                    'phone_number' => $farmer->phone_number,
+                    'profile_image_url' => $farmer->profile_image_url,
+                    'location' => $farmer->location,
+                    'user_type' => $farmer->user_type,
+                    'rating' => $farmer->rating,
+                    'review_count' => $farmer->review_count,
+                    'is_verified' => $farmer->is_verified
+                ]
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Erro ao buscar dados do agricultor',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+
     /**
      * Get chat conversations for current user
      */
