@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CooperativeController;
 
 //*First route
 Route::get('/', [LoginController::class, 'index'])->name('login');
@@ -21,11 +22,13 @@ Route::middleware('auth')->group(function () {
         return Inertia::render('Pages/Dashboard');
     })->name('dashboard');
 
-    //*Product, Farmers and Anylitcs routs
+    //*Product, Farmers, Anylitcs and Cooperative routs
     Route::get('/product', [ProductController::class, 'index']);
 
     Route::get('/farmers', [FarmerController::class, 'index']);
 
     Route::get('/analytics', [AnalyticController::class, 'index']);
+
+    Route::get('/cooperatives', [CooperativeController::class, 'index']);
 });
 

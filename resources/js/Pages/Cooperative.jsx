@@ -1,45 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from '@inertiajs/inertia-react';
 
-export default function Cooperative() {
-    const [cooperatives, setCooperatives] = useState([]);
+export default function Cooperative({ cooperatives }) {
     const [searchTerm, setSearchTerm] = useState('');
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        fetchCooperatives();
-    }, []);
-
-    const fetchCooperatives = async () => {
-        try {
-            setLoading(true);
-            const response = await fetch('/api/cooperative');
-            const result = await response.json();
-
-            if (result.success) {
-                setCooperatives(result.data);
-            } else {
-                setError('Failed to fetch cooperatives');
-            }
-        } catch (err) {
-            setError('Error fetching cooperatives: ' + err.message);
-        } finally {
-            setLoading(false);
-        }
-    };
 
     const filteredCooperatives = cooperatives.filter(coop =>
         coop.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-
-    if (loading) {
-        return <div className="p-6 text-center">Loading cooperatives...</div>;
-    }
-
-    if (error) {
-        return <div className="p-6 text-center text-red-600">{error}</div>;
-    }
 
     return (
         <div className="p-6">
