@@ -106,6 +106,13 @@ export default function Dashboard() {
                                 <TrendingUp className="h-4 w-4" />
                                 <span>Analytics</span>
                             </Link>
+                            <Link
+                                href="/cooperatives"
+                                className="flex items-center gap-2 text-gray-600 hover:text-green-600 transition-colors"
+                            >
+                                <Users className="h-4 w-4" />
+                                <span>Cooperatives</span>
+                            </Link>
                         </div>
 
                         {/* Right Side Actions */}
@@ -173,6 +180,13 @@ export default function Dashboard() {
                                     <Users className="h-4 w-4" />
                                     <span>Farmers</span>
                                 </Link>
+                                <Link
+                                                                href="/cooperatives"
+                                                                className="flex items-center gap-2 text-gray-600 hover:text-green-600 transition-colors"
+                                                            >
+                                                                <Users className="h-4 w-4" />
+                                                                <span>Cooperatives</span>
+                                                            </Link>
                                 <Button onClick={handleLogout} variant="outline" className="justify-start gap-2">
                                     <LogOut className="h-4 w-4" />
                                     Logout

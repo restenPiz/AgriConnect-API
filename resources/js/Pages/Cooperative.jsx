@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from '@inertiajs/inertia-react';
-
 export default function Cooperative({ cooperatives }) {
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -42,9 +40,6 @@ export default function Cooperative({ cooperatives }) {
                                 <p>Type: <span className="font-semibold capitalize">{coop.type}</span></p>
                             </div>
 
-                            <Link href={`/cooperatives/${coop.id}`} className="text-blue-500 hover:underline font-semibold">
-                                View Details
-                            </Link>
                         </div>
                     ))}
                 </div>

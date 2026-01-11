@@ -100,6 +100,13 @@ export default function Product({ products }) {
                                 <TrendingUp className="h-4 w-4" />
                                 <span>Analytics</span>
                             </Link>
+                            <Link
+                                href="/cooperatives"
+                                className="flex items-center gap-2 text-gray-600 hover:text-green-600 transition-colors"
+                            >
+                                <Users className="h-4 w-4" />
+                                <span>Cooperatives</span>
+                            </Link>
                         </div>
 
                         <div className="flex items-center gap-3">
