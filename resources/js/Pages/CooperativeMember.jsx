@@ -1,23 +1,5 @@
 import React, { useMemo, useState } from "react";
 
-/**
- * CooperativeMember.jsx
- *
- * Props:
- * - cooperative: { id, name, description }
- * - members: [{ id, name, email, phone, role, avatarUrl, joinedAt, notes }]
- *
- * This component provides:
- * - Search by name/email/phone
- * - Role filter
- * - Sort options
- * - Paginated, responsive card grid
- * - Click card to open a details modal
- *
- * Tailwind CSS classes are used for styling. If your project doesn't use Tailwind,
- * adjust classes or add styles accordingly.
- */
-
 export default function CooperativeMember({ members = [], cooperative = {} }) {
     const [query, setQuery] = useState("");
     const [roleFilter, setRoleFilter] = useState("all");

@@ -207,7 +207,7 @@ export default function Cooperative({ cooperatives = [] }) {
                                 </div>
 
                                 <div className="flex flex-col items-end gap-2">
-                                    <Link href={`/cooperatives/${coop.id}`} className="text-slate-500 hover:text-emerald-600">
+                                    <Link href={`/cooperativesM/${coop.id}`} className="text-slate-500 hover:text-emerald-600">
                                         <Eye className="h-5 w-5" />
                                     </Link>
 

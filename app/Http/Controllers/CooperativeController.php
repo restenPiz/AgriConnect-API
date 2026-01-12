@@ -21,7 +21,7 @@ class CooperativeController extends Controller
     {
         $cooperative->load('coordinator', 'members');
 
-        return inertia('Pages/Cooperative/Show', [
+        return inertia('Pages/Cooperative/CooperativeMember', [
             'cooperative' => $cooperative,
         ]);
     }
