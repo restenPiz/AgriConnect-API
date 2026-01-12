@@ -19,10 +19,31 @@ class CooperativeController extends Controller
     }
     public function show(Cooperative $cooperative)
     {
-        $cooperative->load('coordinator', 'members');
+        $cooperative = Cooperative::with(['members.farmer', 'coordinator'])
+            ->findOrFail($cooperative->id);
 
-        return inertia('Pages/Cooperative/CooperativeMember', [
+        // Map members into the shape the frontend expects
+        $members = $cooperative->members->map(function ($m) {
+            $farmer = $m->farmer;
+            return [
+                'id' => $m->id,
+                'farmer_id' => $m->farmer_id,
+                'name' => $farmer ? $farmer->name : null,
+                'email' => $farmer ? $farmer->email : null,
+                'phone' => $farmer ? $farmer->phone_number : null,
+                'role' => $m->role,
+                'contribution_percentage' => $m->contribution_percentage,
+                'status' => $m->status,
+                'joinedAt' => $m->joined_at ? $m->joined_at->toDateTimeString() : null,
+                'leftAt' => $m->left_at ? $m->left_at->toDateTimeString() : null,
+                'avatarUrl' => $farmer ? $farmer->profile_image_url : null,
+                'notes' => null,
+            ];
+        })->values();
+
+        return inertia('Pages/CooperativeMember', [
             'cooperative' => $cooperative,
+            'members' => $members,
         ]);
     }
 }
