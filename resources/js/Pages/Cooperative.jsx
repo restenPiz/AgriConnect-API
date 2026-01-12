@@ -161,31 +161,7 @@ export default function Cooperative({ cooperatives = [] }) {
                             <Input value={query} onChange={(e) => setQuery(e.target.value)} className="pl-10" placeholder="Search cooperatives, coordinator, description..." />
                         </div>
 
-                        <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                                <Button variant="outline" size="sm" className="gap-2">
-                                    Sort
-                                    <ChevronDown className="h-4 w-4" />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end" side="bottom">
-                                <DropdownMenuItem onClick={() => setSort('newest')}>Newest</DropdownMenuItem>
-                                <DropdownMenuItem onClick={() => setSort('members_desc')}>Most members</DropdownMenuItem>
-                                <DropdownMenuItem onClick={() => setSort('members_asc')}>Fewest members</DropdownMenuItem>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
 
-                        <Button variant="ghost" size="sm" className="hidden sm:inline-flex gap-2">
-                            <Download className="h-4 w-4" />
-                            Export
-                        </Button>
-
-                        <Link href="/cooperatives/create" className="hidden sm:inline-flex">
-                            <Button size="sm" className="bg-green-600 hover:bg-green-700 text-white gap-2">
-                                <Plus className="h-4 w-4" />
-                                New
-                            </Button>
-                        </Link>
                     </div>
                 </div>
 
