@@ -30,5 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/analytics', [AnalyticController::class, 'index']);
 
     Route::get('/cooperatives', [CooperativeController::class, 'index']);
+
+    Route::get('/cooperatives/{cooperative}', [CooperativeController::class, 'show']);
 });
 

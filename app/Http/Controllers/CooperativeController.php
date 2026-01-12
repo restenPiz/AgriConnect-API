@@ -17,4 +17,12 @@ class CooperativeController extends Controller
             'cooperatives' => $cooperatives,
         ]);
     }
+    public function show(Cooperative $cooperative)
+    {
+        $cooperative->load('coordinator', 'members');
+
+        return inertia('Pages/Cooperative/Show', [
+            'cooperative' => $cooperative,
+        ]);
+    }
 }
