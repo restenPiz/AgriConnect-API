@@ -91,7 +91,7 @@ export default function CooperativeMember({ members = [], cooperative = {} }) {
     }
     const initials = initialsFrom(m.name);
     return (
-      <div className="h-14 w-14 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-700 text-white flex items-center justify-center font-semibold text-lg">
+      <div className="h-14 w-14 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600  text-white flex items-center justify-center font-semibold text-lg">
         {initials}
       </div>
     );
@@ -213,7 +213,7 @@ export default function CooperativeMember({ members = [], cooperative = {} }) {
                   <button
                     key={pageNum}
                     onClick={() => setPage(pageNum)}
-                    className={`px-3 py-1 rounded ${active ? "bg-indigo-600 text-white" : "bg-white border"}`}
+                    className={`px-3 py-1 rounded ${active ? "bg-gradient-to-br from-emerald-400 to-emerald-600 text-white" : "bg-white border"}`}
                   >
                     {pageNum}
                   </button>
