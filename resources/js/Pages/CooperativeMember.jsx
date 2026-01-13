@@ -105,9 +105,6 @@ export default function CooperativeMember({ members = [], cooperative = {} }) {
             <h1 className="text-2xl font-bold text-slate-900">
               {cooperative?.name || "Cooperative Members"}
             </h1>
-            <p className="text-sm text-slate-500">
-              {cooperative?.description || "Members of this cooperative"}
-            </p>
             <p className="mt-2 text-sm text-slate-600">{total} member{total !== 1 ? "s" : ""}</p>
           </div>
 
@@ -122,29 +119,14 @@ export default function CooperativeMember({ members = [], cooperative = {} }) {
               />
             </div>
 
-            <select
-              value={roleFilter}
-              onChange={(e) => { setRoleFilter(e.target.value); setPage(1); }}
-              className="px-3 py-2 border rounded-md bg-white"
-            >
-              {roles.map((r) => (
-                <option key={r} value={r}>
-                  {r === "all" ? "All roles" : r}
-                </option>
-              ))}
-            </select>
-
-            <select
-              value={sort}
-              onChange={(e) => setSort(e.target.value)}
-              className="px-3 py-2 border rounded-md bg-white"
-            >
-              <option value="name_asc">Name ↑</option>
-              <option value="name_desc">Name ↓</option>
-              <option value="joined_desc">Newest</option>
-              <option value="joined_asc">Oldest</option>
-            </select>
-          </div>
+            <Link
+                href="/cooperatives"
+                className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white border border-gray-200 text-sm text-slate-700 shadow-sm hover:shadow-md transition"
+                aria-label="Back to cooperatives"
+                >
+                ← Back to Cooperatives
+            </Link>
+            </div>
         </header>
 
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
