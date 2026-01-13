@@ -180,18 +180,6 @@ export default function CooperativeMember({ members = [], cooperative = {} }) {
                     </div>
                   </div>
                 </div>
-
-                <div className="mt-3 flex items-center justify-end gap-2">
-                  <Link href={`#`} className="text-slate-400 hover:text-emerald-600" onClick={(e) => e.preventDefault()}>
-                    <Eye className="h-4 w-4" />
-                  </Link>
-                  <Link href={`#`} className="text-slate-400 hover:text-amber-600" onClick={(e) => e.preventDefault()}>
-                    <Edit className="h-4 w-4" />
-                  </Link>
-                  <button onClick={(ev) => { ev.stopPropagation(); /* TODO: delete */ }} className="text-slate-400 hover:text-red-600">
-                    <Trash2 className="h-4 w-4" />
-                  </button>
-                </div>
               </article>
             ))
           )}
