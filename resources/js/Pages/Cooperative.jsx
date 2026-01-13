@@ -186,10 +186,6 @@ export default function Cooperative({ cooperatives = [] }) {
                                         </div>
                                     </div>
 
-                                    <p className="mt-3 text-sm text-slate-600 line-clamp-3">
-                                        {coop.description || 'No description provided.'}
-                                    </p>
-
                                     <div className="mt-4 flex items-center gap-3">
                                         <Badge variant="secondary" className="inline-flex items-center gap-2">
                                             <Users className="h-4 w-4" />
