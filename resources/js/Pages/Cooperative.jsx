@@ -192,10 +192,6 @@ export default function Cooperative({ cooperatives = [] }) {
                                             {coop.members_count || 0} members
                                         </Badge>
 
-                                        <span className="text-xs px-2 py-1 rounded bg-slate-100 text-slate-700 capitalize">
-                                            {coop.type || '—'}
-                                        </span>
-
                                         <span className={`text-xs px-2 py-1 rounded ${coop.status === 'active' ? 'bg-green-50 text-green-700' : 'bg-yellow-50 text-yellow-800'}`}>
                                             {coop.status || '—'}
                                         </span>
@@ -203,13 +199,9 @@ export default function Cooperative({ cooperatives = [] }) {
                                 </div>
 
                                 <div className="flex flex-col items-end gap-2">
-                                    <Link href={`/cooperativesM/${coop.id}`} className="text-slate-500 hover:text-emerald-600">
-                                        <Eye className="h-5 w-5" />
-                                    </Link>
-
                                     <div className="flex gap-2">
-                                        <Link href={`/cooperatives/${coop.id}/edit`} className="text-slate-400 hover:text-amber-600">
-                                            <Edit className="h-4 w-4" />
+                                        <Link href={`/cooperativesM/${coop.id}`} className="text-slate-500 hover:text-emerald-600">
+                                            <Eye className="h-5 w-5" />
                                         </Link>
                                         <button onClick={() => {}} className="text-slate-400 hover:text-red-600">
                                             <Trash2 className="h-4 w-4" />
