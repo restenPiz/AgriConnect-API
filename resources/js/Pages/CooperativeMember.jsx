@@ -31,7 +31,6 @@ export default function CooperativeMember({ members = [], cooperative = {} }) {
     return ["all", ...Array.from(setRoles)];
   }, [members]);
 
-  // filter + sort
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     let list = (members || []).filter((m) => {
