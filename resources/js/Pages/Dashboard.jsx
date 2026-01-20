@@ -33,13 +33,6 @@ export default function Dashboard() {
             color: 'bg-blue-500',
         },
         {
-            title: 'Active Orders',
-            value: '32',
-            change: '+5%',
-            icon: ShoppingCart,
-            color: 'bg-green-500',
-        },
-        {
             title: 'Revenue',
             value: '$12,450',
             change: '+23%',
@@ -208,7 +201,7 @@ export default function Dashboard() {
                 </div>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                     {stats.map((stat, index) => (
                         <div key={index} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                             <div className="flex items-center justify-between mb-4">
