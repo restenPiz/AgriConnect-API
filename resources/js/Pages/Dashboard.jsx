@@ -12,12 +12,13 @@ import {
     Sprout,
     ShoppingCart,
     DollarSign,
-    Activity
+    Activity,
+    PackageOpen
 } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Dashboard() {
-    const { auth } = usePage().props;
+    const { auth, totalProducts, totalFarmers, totalCooperatives } = usePage().props;
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const handleLogout = () => {
@@ -27,21 +28,21 @@ export default function Dashboard() {
     const stats = [
         {
             title: 'Total Products',
-            value: '248',
+            value: totalProducts,
             change: '+12%',
             icon: Package,
             color: 'bg-blue-500',
         },
         {
-            title: 'Revenue',
-            value: '$12,450',
+            title: 'Cooperatives',
+            value: totalCooperatives,
             change: '+23%',
-            icon: DollarSign,
+            icon: PackageOpen,
             color: 'bg-purple-500',
         },
         {
             title: 'Connected Farmers',
-            value: '156',
+            value: totalFarmers,
             change: '+18%',
             icon: Users,
             color: 'bg-orange-500',
