@@ -87,8 +87,8 @@ export default function Cooperative({ cooperatives = [] }) {
                             <div className="bg-green-600 p-2 rounded-lg">
                                 <Sprout className="h-6 w-6 text-white" />
                             </div>
-                            <h1 className="text-lg font-bold text-gray-900">AgriConnect</h1>
-                            <span className="text-sm text-gray-500">Cooperatives</span>
+                            <h1 className="text-xl font-bold text-gray-900">AgriConnect</h1>
+                            {/* <span className="text-sm text-gray-500">Cooperatives</span> */}
                         </div>
 
                         <div className="hidden md:flex items-center gap-6">
