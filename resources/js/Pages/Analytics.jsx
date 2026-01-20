@@ -57,22 +57,6 @@ export default function Analytics() {
         { month: 'Jul', sales: 7000, revenue: 5300, orders: 210 }
     ];
 
-    const productCategoryData = [
-        { name: 'Vegetables', value: 400, color: '#10b981' },
-        { name: 'Fruits', value: 300, color: '#f59e0b' },
-        { name: 'Grains', value: 200, color: '#3b82f6' },
-        { name: 'Tubers', value: 150, color: '#8b5cf6' },
-        { name: 'Others', value: 100, color: '#6b7280' }
-    ];
-
-    const topProducts = [
-        { name: 'Organic Tomatoes', sales: 245, revenue: 11025, trend: 'up', change: 12 },
-        { name: 'Fresh Corn', sales: 189, revenue: 5670, trend: 'up', change: 8 },
-        { name: 'Sweet Potatoes', sales: 156, revenue: 5460, trend: 'down', change: -3 },
-        { name: 'Green Lettuce', sales: 142, revenue: 3550, trend: 'up', change: 15 },
-        { name: 'Fresh Carrots', sales: 128, revenue: 3584, trend: 'up', change: 5 }
-    ];
-
     const farmerPerformance = [
         { name: 'João Silva', products: 15, sales: 3200, rating: 4.8 },
         { name: 'Maria Santos', products: 23, sales: 5100, rating: 4.9 },
@@ -326,64 +310,6 @@ export default function Analytics() {
                                 <Bar dataKey="revenue" fill="#3b82f6" radius={[8, 8, 0, 0]} />
                             </BarChart>
                         </ResponsiveContainer>
-                    </div>
-                </div>
-
-                {/* Charts Row 2 */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-                    {/* Product Categories Pie Chart */}
-                    <div className="bg-white rounded-lg border border-gray-200 p-6">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-4">Product Categories</h3>
-                        <ResponsiveContainer width="100%" height={250}>
-                            <PieChart>
-                                <Pie
-                                    data={productCategoryData}
-                                    cx="50%"
-                                    cy="50%"
-                                    labelLine={false}
-                                    label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                                    outerRadius={80}
-                                    fill="#8884d8"
-                                    dataKey="value"
-                                >
-                                    {productCategoryData.map((entry, index) => (
-                                        <Cell key={`cell-${index}`} fill={entry.color} />
-                                    ))}
-                                </Pie>
-                                <Tooltip />
-                            </PieChart>
-                        </ResponsiveContainer>
-                    </div>
-
-                    {/* Top Products */}
-                    <div className="bg-white rounded-lg border border-gray-200 p-6 lg:col-span-2">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-4">Top Selling Products</h3>
-                        <div className="space-y-4">
-                            {topProducts.map((product, index) => (
-                                <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                                    <div className="flex items-center gap-3 flex-1">
-                                        <div className="h-8 w-8 bg-green-100 rounded-full flex items-center justify-center">
-                                            <span className="text-sm font-semibold text-green-600">#{index + 1}</span>
-                                        </div>
-                                        <div className="flex-1">
-                                            <p className="font-medium text-gray-900">{product.name}</p>
-                                            <p className="text-sm text-gray-500">{product.sales} sales</p>
-                                        </div>
-                                    </div>
-                                    <div className="text-right">
-                                        <p className="font-semibold text-gray-900">${product.revenue}</p>
-                                        <div className={`flex items-center gap-1 justify-end ${product.trend === 'up' ? 'text-green-600' : 'text-red-600'}`}>
-                                            {product.trend === 'up' ? (
-                                                <ArrowUpRight className="h-3 w-3" />
-                                            ) : (
-                                                <ArrowDownRight className="h-3 w-3" />
-                                            )}
-                                            <span className="text-xs font-medium">{Math.abs(product.change)}%</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
                     </div>
                 </div>
 
