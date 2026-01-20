@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnalyticController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FarmerController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -16,11 +17,10 @@ Route::post('/login', [LoginController::class, 'login']);
 
 //*User Authenticated routes
 Route::middleware('auth')->group(function () {
+
     Route::get('/logout', [LoginController::class, 'logout']);
 
-    Route::get('/dashboard', function () {
-        return Inertia::render('Pages/Dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     //*Product, Farmers, Anylitcs and Cooperative routs
     Route::get('/product', [ProductController::class, 'index']);
