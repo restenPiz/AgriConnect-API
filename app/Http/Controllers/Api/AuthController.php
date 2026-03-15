@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Log;
 
 class AuthController extends Controller
 {
@@ -92,11 +93,23 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+        if (!$request->user()) {
+            Log::info('Usuario nao autenticado!');
+            return response()->json([
+                'success' => false,
+                'message' => 'Usuário não autenticado',
+            ], 401);
+        }
+
+        // Deletar o token atual
         $request->user()->currentAccessToken()->delete();
 
+        Log::info('logout realizado com sucesso!');
+
         return response()->json([
+            'success' => true,
             'message' => 'Logout realizado com sucesso',
-        ], status: 200);
+        ], 200);
     }
 
     public function user($id)
