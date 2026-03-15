@@ -93,18 +93,38 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
+        \Log::info('=== LOGOUT DEBUG ===');
+        \Log::info('Token Bearer: ' . $request->bearerToken());
+
+        // Verificar se o token existe no banco
+        $tokenHash = hash('sha256', explode('|', $request->bearerToken())[1] ?? '');
+        \Log::info('Token Hash: ' . $tokenHash);
+
+        $tokenExists = \DB::table('personal_access_tokens')
+            ->where('token', $tokenHash)
+            ->first();
+
+        \Log::info('Token existe no banco? ' . ($tokenExists ? 'SIM' : 'NÃO'));
+
+        if ($tokenExists) {
+            \Log::info('Token encontrado - User ID: ' . $tokenExists->tokenable_id);
+
+            // Verificar se o usuário existe
+            $user = \App\Models\User::find($tokenExists->tokenable_id);
+            \Log::info('Usuário encontrado? ' . ($user ? 'SIM' : 'NÃO'));
+        }
+
+        \Log::info('User via $request->user(): ' . json_encode($request->user()));
+
         if (!$request->user()) {
-            Log::info('Usuario nao autenticado!');
+            \Log::error('Usuário não autenticado no logout');
             return response()->json([
                 'success' => false,
-                'message' => 'Usuário não autenticado',
+                'message' => 'Usuário não autenticado. Faça login novamente.',
             ], 401);
         }
 
-        // Deletar o token atual
         $request->user()->currentAccessToken()->delete();
-
-        Log::info('logout realizado com sucesso!');
 
         return response()->json([
             'success' => true,

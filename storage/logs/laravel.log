@@ -4859,3 +4859,26 @@ Did you mean one of these?
 #37 C:/Herd/AgriConnect-API/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php(23): require_once('...')
 #38 {main}
 "} 
+[2026-03-15 20:31:33] local.INFO: Usuario nao autenticado!  
+[2026-03-15 20:36:09] local.INFO: array (
+)  
+[2026-03-15 20:36:09] local.INFO: Usuario nao autenticado!  
+[2026-03-15 20:36:39] local.INFO: array (
+)  
+[2026-03-15 20:36:39] local.INFO:   
+[2026-03-15 20:36:39] local.INFO: Usuario nao autenticado!  
+[2026-03-15 20:37:49] local.INFO: array (
+)  
+[2026-03-15 20:37:49] local.INFO:   
+[2026-03-15 20:37:49] local.INFO: Headers: {"user-agent":["Dart\/3.8 (dart:io)"],"accept":["application\/json"],"accept-encoding":["gzip"],"content-length":["0"],"host":["172.28.223.12:8000"],"authorization":["Bearer 10|fQqjEKXH1zf9RkTQM8Yoz5hHxRhBFnDmdyPSTwZi8a821913"],"content-type":["application\/json"]}  
+[2026-03-15 20:37:49] local.INFO: Token Bearer: 10|fQqjEKXH1zf9RkTQM8Yoz5hHxRhBFnDmdyPSTwZi8a821913  
+[2026-03-15 20:37:49] local.INFO: User: null  
+[2026-03-15 20:37:49] local.INFO: Usuario nao autenticado!  
+[2026-03-15 20:41:14] local.INFO: === LOGOUT DEBUG ===  
+[2026-03-15 20:41:14] local.INFO: Token Bearer: 10|fQqjEKXH1zf9RkTQM8Yoz5hHxRhBFnDmdyPSTwZi8a821913  
+[2026-03-15 20:41:14] local.INFO: Token Hash: fe55a1dd80b389ff242897460d2863801a7541d821d1880e821ef14295415249  
+[2026-03-15 20:41:14] local.INFO: Token existe no banco? SIM  
+[2026-03-15 20:41:14] local.INFO: Token encontrado - User ID: 6  
+[2026-03-15 20:41:14] local.INFO: Usuário encontrado? SIM  
+[2026-03-15 20:41:14] local.INFO: User via $request->user(): null  
+[2026-03-15 20:41:14] local.ERROR: Usuário não autenticado no logout  
