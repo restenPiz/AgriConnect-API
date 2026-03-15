@@ -20,7 +20,6 @@ class AuthController extends Controller
             'phone_number' => 'required|string|max:20|unique:users,phone_number',
             'user_type' => 'required|in:farmer,buyer,transporter',
             'address' => 'nullable|string',
-            'auth_token' => 'nullable|string',
         ]);
 
         $user = User::create([
@@ -31,13 +30,13 @@ class AuthController extends Controller
             'user_type' => $validated['user_type'],
             'address' => $validated['address'] ?? null,
             'status' => 'active',
-            'remember_token' => $validated['remember_token'] ?? null,
         ]);
 
-        // Create token
-        $token = $user->createToken('remember_token')->plainTextToken;
+        // Create token - Sanctum salva automaticamente na tabela personal_access_tokens
+        $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
+            'success' => true,  // ✅ ADICIONE isso
             'message' => 'Conta criada com sucesso',
             'user' => [
                 'id' => $user->id,
@@ -47,7 +46,7 @@ class AuthController extends Controller
                 'user_type' => $user->user_type,
                 'status' => $user->status,
             ],
-            'token' => $token,
+            'token' => $token,  // ✅ Este token será salvo pelo Flutter
         ], 201);
     }
 
