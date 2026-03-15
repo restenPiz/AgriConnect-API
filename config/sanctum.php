@@ -15,7 +15,7 @@ return [
 
     'expiration' => null,
 
-    'token_prefix' => env(''),
+    'token_prefix' => env('SANCTUM_TOKEN_PREFIX', ''),
 
     'middleware' => [
         'authenticate_session' => Laravel\Sanctum\Http\Middleware\AuthenticateSession::class,
