@@ -33,7 +33,7 @@ class AuthController extends Controller
         ]);
 
         // Create token
-        $token = $user->createToken('auth_token')->plainTextToken;
+        $token = $user->createToken('remember_token')->plainTextToken;
 
         return response()->json([
             'message' => 'Conta criada com sucesso',
@@ -72,7 +72,7 @@ class AuthController extends Controller
         }
 
         // Create token
-        $token = $user->createToken('auth_token')->plainTextToken;
+        $token = $user->createToken('remember_token')->plainTextToken;
 
         return response()->json([
             'message' => 'Login realizado com sucesso',
@@ -85,7 +85,7 @@ class AuthController extends Controller
                 'status' => $user->status,
                 // 'auth_token' => $token,
             ],
-            'token' => $token,
+            'remember_token' => $token,
         ], 200);
     }
 
