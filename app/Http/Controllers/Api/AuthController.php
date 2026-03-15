@@ -20,6 +20,7 @@ class AuthController extends Controller
             'phone_number' => 'required|string|max:20|unique:users,phone_number',
             'user_type' => 'required|in:farmer,buyer,transporter',
             'address' => 'nullable|string',
+            'auth_token' => 'nullable|string',
         ]);
 
         $user = User::create([
@@ -30,6 +31,7 @@ class AuthController extends Controller
             'user_type' => $validated['user_type'],
             'address' => $validated['address'] ?? null,
             'status' => 'active',
+            'remember_token' => $validated['remember_token'] ?? null,
         ]);
 
         // Create token
