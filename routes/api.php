@@ -12,7 +12,9 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 //*Authentication Routes
-Route::post('/logout', [AuthController::class, 'logout']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
 Route::post('/user/profile', [AuthController::class, 'updateProfile']);
 Route::get('/userData/{id}', [AuthController::class, 'user']);
 

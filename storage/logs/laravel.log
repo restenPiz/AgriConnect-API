@@ -5188,3 +5188,18 @@ Did you mean one of these?
 #12 C:/Herd/AgriConnect-API/artisan(16): Illuminate/Foundation/Application->handleCommand()
 #13 {main}
 "} 
+[2026-03-15 21:34:24] local.INFO: === LOGOUT DEBUG ===  
+[2026-03-15 21:34:24] local.INFO: Token Bearer: 10|fQqjEKXH1zf9RkTQM8Yoz5hHxRhBFnDmdyPSTwZi8a821913  
+[2026-03-15 21:34:24] local.INFO: Token Hash: fe55a1dd80b389ff242897460d2863801a7541d821d1880e821ef14295415249  
+[2026-03-15 21:34:24] local.INFO: Token existe no banco? SIM  
+[2026-03-15 21:34:24] local.INFO: Token encontrado - User ID: 6  
+[2026-03-15 21:34:24] local.INFO: Usuário encontrado? SIM  
+[2026-03-15 21:34:24] local.INFO: User via $request->user(): null  
+[2026-03-15 21:34:24] local.ERROR: Usuário não autenticado no logout  
+[2026-03-15 21:37:50] local.INFO: === LOGOUT DEBUG ===  
+[2026-03-15 21:37:50] local.INFO: Token Bearer: 10|fQqjEKXH1zf9RkTQM8Yoz5hHxRhBFnDmdyPSTwZi8a821913  
+[2026-03-15 21:37:50] local.INFO: Token Hash: fe55a1dd80b389ff242897460d2863801a7541d821d1880e821ef14295415249  
+[2026-03-15 21:37:50] local.INFO: Token existe no banco? SIM  
+[2026-03-15 21:37:50] local.INFO: Token encontrado - User ID: 6  
+[2026-03-15 21:37:50] local.INFO: Usuário encontrado? SIM  
+[2026-03-15 21:37:50] local.INFO: User via $request->user(): {"id":6,"email_verified_at":null,"email":"arnaldo@gmail.com","phone_number":"867336855","name":"Arnaldo Tomo","user_type":"buyer","profile_image_url":null,"location":null,"address":null,"is_verified":false,"rating":null,"review_count":0,"status":"active","created_at":"2025-11-16T22:33:44.000000Z","updated_at":"2025-11-16T22:33:44.000000Z","deleted_at":null}  
