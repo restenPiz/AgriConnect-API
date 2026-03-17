@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CooperativeController;
 use App\Http\Controllers\Api\ChatController;
+use App\Http\Controllers\Api\PaymentController;
 
 //*Start with the api Routes
 Route::post('/register', [AuthController::class, 'register']);
@@ -46,3 +47,5 @@ Route::get('/chat/user/{userId}', [ChatController::class, 'getUserDetails']);
 Route::get('/chat/conversations', [ChatController::class, 'getConversations']);
 Route::get('/chat/farmer-by-product/{productId}', [ChatController::class, 'getFarmerByProduct']);
 
+//*Payment Routes
+Route::post('/payment', [PaymentController::class, 'store']);
