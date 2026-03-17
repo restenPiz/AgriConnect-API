@@ -5203,3 +5203,24 @@ Did you mean one of these?
 [2026-03-15 21:37:50] local.INFO: Token encontrado - User ID: 6  
 [2026-03-15 21:37:50] local.INFO: Usuário encontrado? SIM  
 [2026-03-15 21:37:50] local.INFO: User via $request->user(): {"id":6,"email_verified_at":null,"email":"arnaldo@gmail.com","phone_number":"867336855","name":"Arnaldo Tomo","user_type":"buyer","profile_image_url":null,"location":null,"address":null,"is_verified":false,"rating":null,"review_count":0,"status":"active","created_at":"2025-11-16T22:33:44.000000Z","updated_at":"2025-11-16T22:33:44.000000Z","deleted_at":null}  
+[2026-03-15 21:39:40] local.INFO: === LOGOUT DEBUG ===  
+[2026-03-15 21:39:40] local.INFO: Token Bearer: 11|HosZgVWSPxkWoB674tXJfAWFYDyB4d5Ub3z3EYwh487c0eb3  
+[2026-03-15 21:39:40] local.INFO: Token Hash: 969aca348ac644df6c050f6f1d90081ee8e81522e3f8643f64c2cd99b2a5f29d  
+[2026-03-15 21:39:40] local.INFO: Token existe no banco? SIM  
+[2026-03-15 21:39:40] local.INFO: Token encontrado - User ID: 6  
+[2026-03-15 21:39:40] local.INFO: Usuário encontrado? SIM  
+[2026-03-15 21:39:40] local.INFO: User via $request->user(): {"id":6,"email_verified_at":null,"email":"arnaldo@gmail.com","phone_number":"867336855","name":"Arnaldo Tomo","user_type":"buyer","profile_image_url":null,"location":null,"address":null,"is_verified":false,"rating":null,"review_count":0,"status":"active","created_at":"2025-11-16T22:33:44.000000Z","updated_at":"2025-11-16T22:33:44.000000Z","deleted_at":null}  
+[2026-03-15 21:45:34] local.INFO: === LOGOUT DEBUG ===  
+[2026-03-15 21:45:34] local.INFO: Token Bearer: 12|xApaCQJmDy676CT611om15juj4OfvdN5f5Thzla0e119ae28  
+[2026-03-15 21:45:34] local.INFO: Token Hash: 61e585e3ffaa2661f32319e92552c979a967d78d94b19990ccfd340ab2a339d3  
+[2026-03-15 21:45:34] local.INFO: Token existe no banco? SIM  
+[2026-03-15 21:45:34] local.INFO: Token encontrado - User ID: 7  
+[2026-03-15 21:45:34] local.INFO: Usuário encontrado? SIM  
+[2026-03-15 21:45:34] local.INFO: User via $request->user(): {"id":7,"email_verified_at":null,"email":"foo@gmail.com","phone_number":"867336877","name":"Foo Lam","user_type":"farmer","profile_image_url":null,"location":null,"address":"Beira","is_verified":false,"rating":null,"review_count":0,"status":"active","created_at":"2025-11-16T22:36:18.000000Z","updated_at":"2025-11-16T22:36:18.000000Z","deleted_at":null}  
+[2026-03-17 05:41:43] local.INFO: === LOGOUT DEBUG ===  
+[2026-03-17 05:41:43] local.INFO: Token Bearer: 17|rBqQ3dAuBow7OKhjkaBORn0W71Cc9zTZJqbpSfFhb4fdcd70  
+[2026-03-17 05:41:43] local.INFO: Token Hash: 102ad5b44a790a127aac6800912f036623edc7a0e62c75f73db7e3273b428e0d  
+[2026-03-17 05:41:43] local.INFO: Token existe no banco? SIM  
+[2026-03-17 05:41:43] local.INFO: Token encontrado - User ID: 6  
+[2026-03-17 05:41:43] local.INFO: Usuário encontrado? SIM  
+[2026-03-17 05:41:43] local.INFO: User via $request->user(): {"id":6,"email_verified_at":null,"email":"arnaldo@gmail.com","phone_number":"867336855","name":"Arnaldo Tomo","user_type":"buyer","profile_image_url":null,"location":null,"address":null,"is_verified":false,"rating":null,"review_count":0,"status":"active","created_at":"2025-11-16T22:33:44.000000Z","updated_at":"2025-11-16T22:33:44.000000Z","deleted_at":null}  
