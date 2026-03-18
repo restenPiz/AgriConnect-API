@@ -5690,3 +5690,6 @@ Did you mean one of these?
 [2026-03-18 19:58:49] local.INFO: Token encontrado - User ID: 6  
 [2026-03-18 19:58:49] local.INFO: Usuário encontrado? SIM  
 [2026-03-18 19:58:49] local.INFO: User via $request->user(): {"id":6,"email_verified_at":null,"email":"arnaldo@gmail.com","phone_number":"867336855","name":"Arnaldo Tomo","user_type":"buyer","profile_image_url":null,"location":null,"address":null,"is_verified":false,"rating":null,"review_count":0,"status":"active","created_at":"2025-11-16T22:33:44.000000Z","updated_at":"2025-11-16T22:33:44.000000Z","deleted_at":null}  
+[2026-03-18 22:11:49] local.INFO: Buscando dados financeiros para agricultor {"farmer_id":7} 
+[2026-03-18 22:15:26] local.INFO: Buscando dados financeiros para agricultor {"farmer_id":7} 
+[2026-03-18 22:18:24] local.INFO: Buscando dados financeiros para agricultor {"farmer_id":7} 

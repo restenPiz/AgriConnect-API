@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CooperativeController;
 use App\Http\Controllers\Api\ChatController;
 use App\Http\Controllers\Api\PaymentController;
+use App\Http\Controllers\Api\FinanceController;
 
 //*Start with the api Routes
 Route::post('/register', [AuthController::class, 'register']);
@@ -17,6 +18,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     //* M-Pesa Payment
     Route::post('/orders/mpesa-payment', [PaymentController::class, 'initiateMpesaPayment']);
+
+    //* Finance Routes
+
+
+    Route::get('/farmer/finances', [FinanceController::class, 'getFarmerFinances']);
+    Route::get('/farmer/sales-by-period', [FinanceController::class, 'getSalesByPeriod']);
 });
 
 //* Webhook M-Pesa (sem autenticação)

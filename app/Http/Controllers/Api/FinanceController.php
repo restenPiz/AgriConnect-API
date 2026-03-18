@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\OrderItem;
 use App\Models\Order;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class FinanceController extends Controller
 {
@@ -17,18 +18,19 @@ class FinanceController extends Controller
     {
         try {
             $farmerId = $request->user()->id;
+            Log::info('Buscando dados financeiros para agricultor', ['farmer_id' => $farmerId]);
 
             // Total de vendas (todos os tempos)
             $totalSales = OrderItem::where('farmer_id', $farmerId)
                 ->whereHas('order', function ($query) {
-                    $query->whereIn('payment_status', ['completed', 'processing']);
+                    $query->whereIn('payment_status', ['processing']);
                 })
                 ->sum('total_price');
 
             // Vendas do mês atual
             $currentMonthSales = OrderItem::where('farmer_id', $farmerId)
                 ->whereHas('order', function ($query) {
-                    $query->whereIn('payment_status', ['completed', 'processing'])
+                    $query->whereIn('payment_status', ['processing'])
                         ->whereMonth('created_at', now()->month)
                         ->whereYear('created_at', now()->year);
                 })
@@ -37,7 +39,7 @@ class FinanceController extends Controller
             // Vendas do dia
             $todaySales = OrderItem::where('farmer_id', $farmerId)
                 ->whereHas('order', function ($query) {
-                    $query->whereIn('payment_status', ['completed', 'processing'])
+                    $query->whereIn('payment_status', ['processing'])
                         ->whereDate('created_at', today());
                 })
                 ->sum('total_price');
@@ -45,7 +47,7 @@ class FinanceController extends Controller
             // Número total de pedidos
             $totalOrders = OrderItem::where('farmer_id', $farmerId)
                 ->whereHas('order', function ($query) {
-                    $query->whereIn('payment_status', ['completed', 'processing']);
+                    $query->whereIn('payment_status', ['processing']);
                 })
                 ->distinct('order_id')
                 ->count('order_id');
@@ -53,14 +55,14 @@ class FinanceController extends Controller
             // Produtos vendidos (quantidade total)
             $totalProductsSold = OrderItem::where('farmer_id', $farmerId)
                 ->whereHas('order', function ($query) {
-                    $query->whereIn('payment_status', ['completed', 'processing']);
+                    $query->whereIn('payment_status', ['processing']);
                 })
                 ->sum('quantity');
 
             // Top 5 produtos mais vendidos
             $topProducts = OrderItem::where('farmer_id', $farmerId)
                 ->whereHas('order', function ($query) {
-                    $query->whereIn('payment_status', ['completed', 'processing']);
+                    $query->whereIn('payment_status', ['processing']);
                 })
                 ->select(
                     'product_id',
@@ -89,7 +91,7 @@ class FinanceController extends Controller
                 $date = now()->subDays($i);
                 $sales = OrderItem::where('farmer_id', $farmerId)
                     ->whereHas('order', function ($query) use ($date) {
-                        $query->whereIn('payment_status', ['completed', 'processing'])
+                        $query->whereIn('payment_status', ['processing'])
                             ->whereDate('created_at', $date);
                     })
                     ->sum('total_price');
@@ -159,11 +161,12 @@ class FinanceController extends Controller
     {
         try {
             $farmerId = $request->user()->id;
+            Log::info('Buscando vendas por período para agricultor', ['farmer_id' => $farmerId]);
             $period = $request->query('period', 'month'); // day, week, month, year
 
             $query = OrderItem::where('farmer_id', $farmerId)
                 ->whereHas('order', function ($q) {
-                    $q->whereIn('payment_status', ['completed', 'processing']);
+                    $q->whereIn('payment_status', ['processing']);
                 });
 
             switch ($period) {
