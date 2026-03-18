@@ -15,7 +15,13 @@ Route::post('/login', [AuthController::class, 'login']);
 //*Authentication Routes
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
+    //* M-Pesa Payment
+    Route::post('/orders/mpesa-payment', [PaymentController::class, 'initiateMpesaPayment']);
 });
+
+//* Webhook M-Pesa (sem autenticação)
+Route::post('/mpesa/callback', [PaymentController::class, 'mpesaCallback']);
+
 Route::post('/user/profile', [AuthController::class, 'updateProfile']);
 Route::get('/userData/{id}', [AuthController::class, 'user']);
 
