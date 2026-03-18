@@ -6,6 +6,17 @@
       0 => 'Inertia\\ServiceProvider',
     ),
   ),
+  'karson/mpesa-php-sdk' => 
+  array (
+    'aliases' => 
+    array (
+      'Mpesa' => 'Karson\\MpesaPhpSdk\\Laravel\\Mpesa',
+    ),
+    'providers' => 
+    array (
+      0 => 'Karson\\MpesaPhpSdk\\Laravel\\ServiceProvider',
+    ),
+  ),
   'laravel/pail' => 
   array (
     'providers' => 

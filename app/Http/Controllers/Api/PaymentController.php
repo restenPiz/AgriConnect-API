@@ -4,26 +4,28 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Order;
-use App\Models\Product;
-use App\Models\OrderItem;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
+use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\Product;
+use Paymentsds\MPesa\Client;
 
 class PaymentController extends Controller
 {
-    private $apiKey;
-    private $publicKey;
+    private $mpesaClient;
     private $serviceProviderCode;
-    private $baseUrl;
 
     public function __construct()
     {
-        // Suas credenciais M-Pesa (use .env em produção)
-        $this->apiKey = env('MPESA_API_KEY');
-        $this->publicKey = env('MPESA_PUBLIC_KEY');
-        $this->serviceProviderCode = env('MPESA_SERVICE_PROVIDER_CODE');
-        $this->baseUrl = env('MPESA_BASE_URL'); // Sandbox
+        // Inicializar cliente M-Pesa
+        $this->mpesaClient = new Client([
+            'apiKey' => env('MPESA_API_KEY'),
+            'publicKey' => env('MPESA_PUBLIC_KEY'),
+            'serviceProviderCode' => env('MPESA_SERVICE_PROVIDER_CODE', '171717'),
+        ]);
+
+        $this->serviceProviderCode = env('MPESA_SERVICE_PROVIDER_CODE', '171717');
     }
 
     /**
@@ -35,6 +37,9 @@ class PaymentController extends Controller
             'phone_number' => 'required|string',
             'amount' => 'required|numeric|min:1',
             'items' => 'required|array',
+            'items.*.product_id' => 'required|exists:products,id',
+            'items.*.quantity' => 'required|numeric|min:1',
+            'items.*.price' => 'required|numeric|min:0',
         ]);
 
         try {
@@ -52,28 +57,27 @@ class PaymentController extends Controller
             // 1. Criar pedido no banco
             $order = Order::create([
                 'buyer_id' => $userId,
+                'cooperative_id' => 2,
                 'total_amount' => $amount,
                 'status' => 'pending',
-                'payment_method' => 'mpesa',
+                'payment_method' => 'mobile_money',
                 'payment_status' => 'pending',
-                'cooperative_id' => 2,
             ]);
+
+            Log::info('Pedido criado', ['order_id' => $order->id]);
 
             // 2. Criar itens do pedido
             foreach ($items as $item) {
-                // Buscar produto para obter farmer_id
                 $product = Product::findOrFail($item['product_id']);
 
-                // Calcular preços
                 $quantity = $item['quantity'];
                 $unitPrice = $item['price'];
                 $totalPrice = $quantity * $unitPrice;
 
-                // Criar item do pedido
                 OrderItem::create([
                     'order_id' => $order->id,
                     'product_id' => $product->id,
-                    'farmer_id' => $product->farmer_id, // ← Aqui está o farmer_id!
+                    'farmer_id' => $product->farmer_id,
                     'quantity' => $quantity,
                     'unit_price' => $unitPrice,
                     'total_price' => $totalPrice,
@@ -87,23 +91,46 @@ class PaymentController extends Controller
                 ]);
             }
 
-            // 3. Gerar referência única
-            $transactionReference = 'ORDER' . $order->id . time();
+            // 3. Gerar referência e transação
+            $transaction = 'TXN' . strtoupper(Str::random(8));
+            $reference = 'ORD' . $order->id . random_int(1000, 9999);
 
-            // 4. Chamar API M-Pesa C2B (Customer to Business)
-            $mpesaResponse = $this->sendMpesaRequest(
-                $phoneNumber,
-                $amount,
-                $transactionReference
-            );
+            // 4. Limpar número de telefone (remover 258 se existir)
+            $cleanPhone = str_replace('258', '', $phoneNumber);
 
-            Log::info('Resposta M-Pesa', ['response' => $mpesaResponse]);
+            // 5. Preparar dados para M-Pesa
+            $paymentData = [
+                'from' => '258' . $cleanPhone, // Garantir formato correto
+                'reference' => $reference,
+                'transaction' => $transaction,
+                'amount' => (string) $amount, // M-Pesa precisa como string
+            ];
 
-            if ($mpesaResponse['success']) {
-                // Atualizar pedido com dados da transação
+            Log::info('Enviando dados para M-Pesa:', $paymentData);
+
+            // 6. Chamar API M-Pesa usando SDK
+            $result = $this->mpesaClient->receive($paymentData);
+
+            Log::info('Resposta do M-Pesa:', [
+                'result' => json_encode($result)
+            ]);
+
+            // 7. Verificar sucesso usando Reflection (como no seu código)
+            $reflection = new \ReflectionClass($result);
+            $successProperty = $reflection->getProperty('success');
+            $successProperty->setAccessible(true);
+            $success = $successProperty->getValue($result);
+
+            if ($success) {
+                // Pagamento iniciado com sucesso
                 $order->update([
-                    'transaction_id' => $mpesaResponse['transaction_id'] ?? $transactionReference,
+                    'transaction_id' => $transaction,
                     'payment_status' => 'processing',
+                ]);
+
+                Log::info('Pagamento M-Pesa bem-sucedido', [
+                    'order_id' => $order->id,
+                    'transaction' => $transaction
                 ]);
 
                 return response()->json([
@@ -111,17 +138,23 @@ class PaymentController extends Controller
                     'message' => 'Pagamento iniciado! Verifique seu telefone M-Pesa para confirmar.',
                     'data' => [
                         'order_id' => $order->id,
-                        'transaction_id' => $transactionReference,
+                        'transaction_id' => $transaction,
+                        'reference' => $reference,
                         'amount' => $amount,
                     ],
                 ], 201);
             } else {
-                // Falha no M-Pesa
+                // Pagamento falhou
                 $order->update(['payment_status' => 'failed']);
+
+                Log::warning('Pagamento M-Pesa falhou', [
+                    'order_id' => $order->id,
+                    'response' => json_encode($result)
+                ]);
 
                 return response()->json([
                     'success' => false,
-                    'message' => $mpesaResponse['message'] ?? 'Erro ao processar pagamento M-Pesa',
+                    'message' => 'Pagamento não autorizado. Verifique seu saldo M-Pesa.',
                 ], 400);
             }
 
@@ -140,116 +173,36 @@ class PaymentController extends Controller
     }
 
     /**
-     * Enviar requisição para API M-Pesa
-     */
-    private function sendMpesaRequest($phoneNumber, $amount, $reference)
-    {
-        try {
-            $endpoint = $this->baseUrl . '/ipg/v1x/c2bPayment/singleStage/';
-
-            $payload = [
-                'input_TransactionReference' => $reference,
-                'input_CustomerMSISDN' => $phoneNumber,
-                'input_Amount' => $amount,
-                'input_ThirdPartyReference' => $reference,
-                'input_ServiceProviderCode' => $this->serviceProviderCode,
-            ];
-
-            Log::info('Enviando requisição M-Pesa', [
-                'endpoint' => $endpoint,
-                'payload' => $payload
-            ]);
-
-            $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $this->apiKey,
-                'Content-Type' => 'application/json',
-                'Origin' => '*',
-            ])->post($endpoint, $payload);
-
-            $responseData = $response->json();
-
-            Log::info('Resposta M-Pesa recebida', [
-                'status' => $response->status(),
-                'data' => $responseData
-            ]);
-
-            if ($response->successful() && isset($responseData['output_ResponseCode'])) {
-                $responseCode = $responseData['output_ResponseCode'];
-
-                // INS-0 significa sucesso
-                if ($responseCode === 'INS-0') {
-                    return [
-                        'success' => true,
-                        'transaction_id' => $responseData['output_TransactionID'] ?? $reference,
-                        'conversation_id' => $responseData['output_ConversationID'] ?? null,
-                    ];
-                } else {
-                    return [
-                        'success' => false,
-                        'message' => $responseData['output_ResponseDesc'] ?? 'Erro no pagamento',
-                        'code' => $responseCode,
-                    ];
-                }
-            }
-
-            return [
-                'success' => false,
-                'message' => 'Resposta inválida da API M-Pesa',
-            ];
-
-        } catch (\Exception $e) {
-            Log::error('Erro na requisição M-Pesa', [
-                'error' => $e->getMessage()
-            ]);
-
-            return [
-                'success' => false,
-                'message' => 'Erro ao conectar com M-Pesa: ' . $e->getMessage(),
-            ];
-        }
-    }
-
-    /**
-     * Webhook para receber confirmação do M-Pesa
+     * Webhook para confirmação M-Pesa (opcional)
      */
     public function mpesaCallback(Request $request)
     {
         Log::info('Callback M-Pesa recebido', $request->all());
 
         try {
-            $transactionId = $request->input('output_TransactionID');
-            $responseCode = $request->input('output_ResponseCode');
+            // Processar confirmação do pagamento
+            $transactionId = $request->input('transaction_id');
 
-            // Encontrar pedido pelo transaction_id
             $order = Order::where('transaction_id', $transactionId)->first();
 
             if ($order) {
-                if ($responseCode === 'INS-0') {
-                    // Pagamento confirmado
-                    $order->update([
-                        'payment_status' => 'completed',
-                        'status' => 'confirmed',
-                    ]);
+                $order->update([
+                    'payment_status' => 'completed',
+                    'status' => 'confirmed',
+                ]);
 
-                    Log::info('Pagamento confirmado', ['order_id' => $order->id]);
-                } else {
-                    // Pagamento falhou
-                    $order->update([
-                        'payment_status' => 'failed',
-                        'status' => 'cancelled',
-                    ]);
-
-                    Log::warning('Pagamento falhou', [
-                        'order_id' => $order->id,
-                        'code' => $responseCode
-                    ]);
-                }
+                Log::info('Pagamento confirmado via callback', [
+                    'order_id' => $order->id
+                ]);
             }
 
             return response()->json(['success' => true], 200);
 
         } catch (\Exception $e) {
-            Log::error('Erro no callback M-Pesa', ['error' => $e->getMessage()]);
+            Log::error('Erro no callback M-Pesa', [
+                'error' => $e->getMessage()
+            ]);
+
             return response()->json(['success' => false], 500);
         }
     }
