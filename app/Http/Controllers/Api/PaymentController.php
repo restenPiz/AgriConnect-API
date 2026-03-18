@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\OrderItem;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -55,16 +56,34 @@ class PaymentController extends Controller
                 'status' => 'pending',
                 'payment_method' => 'mpesa',
                 'payment_status' => 'pending',
+                'cooperative_id' => 2,
             ]);
 
             // 2. Criar itens do pedido
             foreach ($items as $item) {
+                // Buscar produto para obter farmer_id
+                $product = Product::findOrFail($item['product_id']);
+
+                // Calcular preços
+                $quantity = $item['quantity'];
+                $unitPrice = $item['price'];
+                $totalPrice = $quantity * $unitPrice;
+
+                // Criar item do pedido
                 OrderItem::create([
                     'order_id' => $order->id,
-                    'product_id' => $item['product_id'],
-                    'quantity' => $item['quantity'],
-                    'unit_price' => $item['price'],
-                    'subtotal' => $item['quantity'] * $item['price'],
+                    'product_id' => $product->id,
+                    'farmer_id' => $product->farmer_id, // ← Aqui está o farmer_id!
+                    'quantity' => $quantity,
+                    'unit_price' => $unitPrice,
+                    'total_price' => $totalPrice,
+                    'status' => 'pending',
+                ]);
+
+                Log::info('Item adicionado', [
+                    'product_id' => $product->id,
+                    'farmer_id' => $product->farmer_id,
+                    'quantity' => $quantity
                 ]);
             }
 
