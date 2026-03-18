@@ -19,10 +19,10 @@ class PaymentController extends Controller
     public function __construct()
     {
         // Suas credenciais M-Pesa (use .env em produção)
-        $this->apiKey = env('MPESA_API_KEY', 'sua_api_key_aqui');
-        $this->publicKey = env('MPESA_PUBLIC_KEY', 'sua_public_key_aqui');
-        $this->serviceProviderCode = env('MPESA_SERVICE_PROVIDER_CODE', '171717');
-        $this->baseUrl = env('MPESA_BASE_URL', 'https://api.sandbox.vm.co.mz'); // Sandbox
+        $this->apiKey = env('MPESA_API_KEY');
+        $this->publicKey = env('MPESA_PUBLIC_KEY');
+        $this->serviceProviderCode = env('MPESA_SERVICE_PROVIDER_CODE');
+        $this->baseUrl = env('MPESA_BASE_URL'); // Sandbox
     }
 
     /**
