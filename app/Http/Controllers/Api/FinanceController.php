@@ -130,21 +130,35 @@ class FinanceController extends Controller
                     ];
                 });
 
-            return response()->json([
-                'success' => true,
-                'data' => [
-                    'summary' => [
-                        'total_sales' => $totalSales,
-                        'current_month_sales' => $currentMonthSales,
-                        'today_sales' => $todaySales,
-                        'total_orders' => $totalOrders,
-                        'total_products_sold' => $totalProductsSold,
-                    ],
-                    'top_products' => $topProducts,
-                    'last_7_days_sales' => $last7DaysSales,
-                    'recent_orders' => $recentOrders,
+            $responseData = [
+                'summary' => [
+                    'total_sales' => $totalSales,
+                    'current_month_sales' => $currentMonthSales,
+                    'today_sales' => $todaySales,
+                    'total_orders' => $totalOrders,
+                    'total_products_sold' => $totalProductsSold,
                 ],
+                'top_products' => $topProducts,
+                'last_7_days_sales' => $last7DaysSales,
+                'recent_orders' => $recentOrders,
+            ];
+
+            Log::info('Dados preparados', [
+                'summary' => $responseData['summary'],
+                'top_products_count' => count($responseData['top_products']),
+                'recent_orders_count' => count($responseData['recent_orders']),
             ]);
+
+            $response = response()->json([
+                'success' => true,
+                'data' => $responseData,
+            ]);
+
+            Log::info('Resposta JSON enviada', [
+                'response' => $response->getData()
+            ]);
+
+            return $response;
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
