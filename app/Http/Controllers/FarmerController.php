@@ -9,6 +9,7 @@ class FarmerController extends Controller
 {
     public function index()
     {
+        //dni
         $farmers = User::where('user_type', 'farmer')
             ->where('name', '!=', 'Admin')
             ->get();
