@@ -20,8 +20,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/orders/mpesa-payment', [PaymentController::class, 'initiateMpesaPayment']);
 
     //* Finance Routes
-
-
     Route::get('/farmer/finances', [FinanceController::class, 'getFarmerFinances']);
     Route::get('/farmer/sales-by-period', [FinanceController::class, 'getSalesByPeriod']);
 });
