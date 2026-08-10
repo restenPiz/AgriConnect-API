@@ -71,6 +71,7 @@ export default function CooperativeMember({ members = [], cooperative = {} }) {
     setPage((p) => Math.min(pages, p + 1));
   }
 
+  //Inicio do metodo de inicio do fomulario
   function initialsFrom(name = "") {
     const parts = name.trim().split(" ").filter(Boolean);
     if (!parts.length) return "U";
