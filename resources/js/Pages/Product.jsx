@@ -1,6 +1,6 @@
 import { Link, router, usePage } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
     Home,
     Users,
@@ -21,7 +21,9 @@ import {
     Eye,
     CheckCircle,
     XCircle,
-    Clock
+    Clock,
+    Sun,
+    Moon
 } from 'lucide-react';
 import { Input } from "@/components/ui/input"
 import {
@@ -57,6 +59,24 @@ export default function Product({ products }) {
         product.farmer.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.category.toLowerCase().includes(searchQuery.toLowerCase())
     );
+
+    const [isDarkMode, setIsDarkMode] = useState(() => {
+            if (typeof window === 'undefined') return false;
+            const saved = localStorage.getItem('theme');
+            if (saved) return saved === 'dark';
+            return window.matchMedia('(prefers-color-scheme: dark)').matches;
+        });
+
+        useEffect(() => {
+            const root = document.documentElement;
+            if (isDarkMode) {
+                root.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                root.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            }
+        }, [isDarkMode]);
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
@@ -110,6 +130,21 @@ export default function Product({ products }) {
                         </div>
 
                         <div className="flex items-center gap-3">
+
+                             {/* Dark Mode Toggle */}
+                            <Button
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => setIsDarkMode(!isDarkMode)}
+                                className="text-gray-600 dark:text-gray-300"
+                                aria-label="Toggle dark mode"
+                            >
+                                {isDarkMode ? (
+                                    <Sun className="h-5 w-5" />
+                                ) : (
+                                    <Moon className="h-5 w-5" />
+                                )}
+                            </Button>
 
                             <Button variant="ghost" size="icon" className="relative hidden md:flex">
                                 <Settings className="h-5 w-5 text-gray-600" />
