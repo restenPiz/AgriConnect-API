@@ -25,16 +25,16 @@ export default function Dashboard() {
     const [isDarkMode, setIsDarkMode] = useDarkMode();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-    useEffect(() => {
-        const root = document.documentElement;
-        if (isDarkMode) {
-            root.classList.add('dark');
-            localStorage.setItem('theme', 'dark');
-        } else {
-            root.classList.remove('dark');
-            localStorage.setItem('theme', 'light');
-        }
-    }, [isDarkMode]);
+    // useEffect(() => {
+    //     const root = document.documentElement;
+    //     if (isDarkMode) {
+    //         root.classList.add('dark');
+    //         localStorage.setItem('theme', 'dark');
+    //     } else {
+    //         root.classList.remove('dark');
+    //         localStorage.setItem('theme', 'light');
+    //     }
+    // }, [isDarkMode]);
 
     const handleLogout = () => {
         router.get('/logout');

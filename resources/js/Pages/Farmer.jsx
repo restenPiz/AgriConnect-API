@@ -1,7 +1,7 @@
 import { Link, router, usePage } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
-import { useDarkMode } from '@/hooks/userDarkMode';
+import { useDarkMode } from '@/hooks/userDarkMode.jsx';
 import {
     Home,
     Users,
@@ -126,9 +126,9 @@ export default function Farmer({ farmers }) {
                                 aria-label="Toggle dark mode"
                             >
                                 {isDarkMode ? (
-                                    <Sun className="h-5 w-5" />
+                                    <Sun className="h-5 w-5 text-gray-600" />
                                 ) : (
-                                    <Moon className="h-5 w-5" />
+                                    <Moon className="h-5 w-5 text-gray-600" />
                                 )}
                             </Button>
 
