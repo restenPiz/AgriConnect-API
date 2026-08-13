@@ -1,6 +1,7 @@
 import { Link, router, usePage } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
+import { useDarkMode } from '@/hooks/userDarkMode';
 import {
     Home,
     Users,
@@ -36,9 +37,10 @@ import { Badge } from "@/components/ui/badge"
 
 export default function Product({ products }) {
     const { auth } = usePage().props;
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
 
+    const [isDarkMode, setIsDarkMode] = useDarkMode();
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const handleLogout = () => {
         router.get('/logout');
     };
@@ -59,24 +61,6 @@ export default function Product({ products }) {
         product.farmer.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.category.toLowerCase().includes(searchQuery.toLowerCase())
     );
-
-    const [isDarkMode, setIsDarkMode] = useState(() => {
-            if (typeof window === 'undefined') return false;
-            const saved = localStorage.getItem('theme');
-            if (saved) return saved === 'dark';
-            return window.matchMedia('(prefers-color-scheme: dark)').matches;
-        });
-
-        useEffect(() => {
-            const root = document.documentElement;
-            if (isDarkMode) {
-                root.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                root.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            }
-        }, [isDarkMode]);
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
@@ -131,7 +115,7 @@ export default function Product({ products }) {
 
                         <div className="flex items-center gap-3">
 
-                             {/* Dark Mode Toggle */}
+                            {/* Dark Mode Toggle */}
                             <Button
                                 variant="ghost"
                                 size="icon"

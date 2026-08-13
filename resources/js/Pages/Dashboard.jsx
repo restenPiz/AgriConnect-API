@@ -1,5 +1,6 @@
 import { Link, router, usePage } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
+import { useDarkMode } from '@/hooks/userDarkMode';
 import {
     Home,
     Users,
@@ -21,13 +22,8 @@ import { useState, useEffect } from 'react';
 
 export default function Dashboard() {
     const { auth, totalProducts, totalFarmers, totalCooperatives } = usePage().props;
+    const [isDarkMode, setIsDarkMode] = useDarkMode();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [isDarkMode, setIsDarkMode] = useState(() => {
-        if (typeof window === 'undefined') return false;
-        const saved = localStorage.getItem('theme');
-        if (saved) return saved === 'dark';
-        return window.matchMedia('(prefers-color-scheme: dark)').matches;
-    });
 
     useEffect(() => {
         const root = document.documentElement;
