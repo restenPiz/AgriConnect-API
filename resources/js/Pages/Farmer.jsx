@@ -1,7 +1,6 @@
 import { Link, router, usePage } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
-import { useDarkMode } from '@/hooks/userDarkMode.jsx';
 import {
     Home,
     Users,
@@ -36,7 +35,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Badge } from "@/components/ui/badge"
+import { Badge } from "@/components/ui/badge";
+import { useDarkMode } from '@/hooks/userDarkMode';
 
 export default function Farmer({ farmers }) {
     const { auth } = usePage().props;
