@@ -1,6 +1,7 @@
 import { Link, router, usePage } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
+import { useDarkMode } from '@/hooks/userDarkMode';
 import {
     Home,
     Users,
@@ -25,7 +26,8 @@ import {
     Star,
     CheckCircle,
     XCircle,
-    AlertCircle
+    AlertCircle,
+    Sun, Moon
 } from 'lucide-react';
 import { Input } from "@/components/ui/input"
 import {
@@ -40,6 +42,7 @@ export default function Farmer({ farmers }) {
     const { auth } = usePage().props;
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
+    const [isDarkMode, setIsDarkMode] = useDarkMode();
 
     const handleLogout = () => {
         router.get('/logout');
@@ -114,6 +117,20 @@ export default function Farmer({ farmers }) {
                         </div>
 
                         <div className="flex items-center gap-3">
+                            {/* Dark Mode Toggle */}
+                            <Button
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => setIsDarkMode(!isDarkMode)}
+                                className="text-gray-600 dark:text-gray-300"
+                                aria-label="Toggle dark mode"
+                            >
+                                {isDarkMode ? (
+                                    <Sun className="h-5 w-5" />
+                                ) : (
+                                    <Moon className="h-5 w-5" />
+                                )}
+                            </Button>
 
                             <Button variant="ghost" size="icon" className="relative hidden md:flex">
                                 <Settings className="h-5 w-5 text-gray-600" />
